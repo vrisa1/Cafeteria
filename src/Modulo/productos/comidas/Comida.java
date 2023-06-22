@@ -7,7 +7,9 @@ public class Comida extends Producto {
     //private Date horarios;
     private boolean paraCompartir;
 
-    public Comida(String nombre, double precio, int disponibilidad, int cantidadVendidos, String descripcion) {
-        super(nombre, precio, disponibilidad, cantidadVendidos, descripcion);
+    public Comida(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, boolean paraCompartir) {
+        super(nombre, precio, disponible, cantidadVendidos, descripcion);
+        this.paraCompartir = paraCompartir;
     }
+
 }
