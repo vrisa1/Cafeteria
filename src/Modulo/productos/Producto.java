@@ -14,4 +14,15 @@ public abstract class Producto {
         this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", disponible=" + disponible +
+                ", cantidadVendidos=" + cantidadVendidos +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
 }
