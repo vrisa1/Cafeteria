@@ -4,6 +4,8 @@ import Modulo.productos.Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Comida extends Producto {
 
     //ATRIBUTOS---------------------------------------------------------------------------------------------------
@@ -32,6 +34,7 @@ public class Comida extends Producto {
     public void setParaCompartir(boolean paraCompartir) {
         this.paraCompartir = paraCompartir;
     }
+
 
     //EQUALS Y TOSTRING------------------------------------------------------------------------------------------
 
@@ -85,4 +88,4 @@ public class Comida extends Producto {
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setParaCompartir(jsonObject.getBoolean("paraCompartir"));
     }
-}
+

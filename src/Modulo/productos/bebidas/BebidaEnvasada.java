@@ -2,6 +2,7 @@ package Modulo.productos.bebidas;
 
 import Modulo.productos.bebidas.Bebida;
 import Modulo.productos.comidas.Comida;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +37,7 @@ public class BebidaEnvasada extends Bebida {
 
     public void setGas(boolean gas) {
         this.gas = gas;
+
     }
 
     public String getLinea() {
@@ -103,4 +105,3 @@ public class BebidaEnvasada extends Bebida {
         setGas(jsonObject.getBoolean("gas"));
         setLinea(jsonObject.getString("linea"));
     }
-}

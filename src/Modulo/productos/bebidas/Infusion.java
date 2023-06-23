@@ -2,8 +2,12 @@ package Modulo.productos.bebidas;
 
 import Modulo.productos.bebidas.Bebida;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Objects;
+
 
 public class Infusion extends Bebida { //y otros
 
@@ -21,7 +25,7 @@ public class Infusion extends Bebida { //y otros
         //no se si dejar leche entera como default y cambiarla despues
         //o si eliminar el constructor vacio
     }
-
+  
     public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, String temperatura, Leche tipoDeLeche) {
         super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
         this.temperatura = temperatura;
@@ -103,4 +107,3 @@ public class Infusion extends Bebida { //y otros
         setTemperatura(jsonObject.getString("temperatura"));
         //setTipoDeLeche(jsonObject.getJSONObject("tipoDeLeche")); //como leo esto de json??
     }
-}
