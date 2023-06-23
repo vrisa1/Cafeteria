@@ -1,16 +1,19 @@
 package Modulo.usuarios;
 
-public abstract class Usuario {
-    private String id;
+import java.util.Objects;
+
+public class Usuario {
+    private String id;///para que?
     private String nombreDeUsuario;
     private String contraseña;
     private boolean administrador;
 
 
-    public Usuario(String id, String nombreDeUsuario, String contraseña) {
-        this.id = id;
+    public Usuario(String nombreDeUsuario, String contraseña) {
+        this.id = "0";
         this.nombreDeUsuario = nombreDeUsuario;
         this.contraseña = contraseña;
+        this.administrador = false;
     }
 
     public Usuario() {
@@ -24,6 +27,18 @@ public abstract class Usuario {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
+
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
     }
 
     public String getContraseña() {
@@ -41,6 +56,19 @@ public abstract class Usuario {
                 ", nombreDeUsuario='" + nombreDeUsuario + '\'' +
                 ", contraseña='" + contraseña + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(nombreDeUsuario, usuario.nombreDeUsuario);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 
     //metodo crear usuario
