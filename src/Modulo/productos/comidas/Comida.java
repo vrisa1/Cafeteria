@@ -88,4 +88,6 @@ public class Comida extends Producto {
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setParaCompartir(jsonObject.getBoolean("paraCompartir"));
     }
+}
+
 

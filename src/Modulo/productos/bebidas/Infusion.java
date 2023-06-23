@@ -107,3 +107,4 @@ public class Infusion extends Bebida { //y otros
         setTemperatura(jsonObject.getString("temperatura"));
         //setTipoDeLeche(jsonObject.getJSONObject("tipoDeLeche")); //como leo esto de json??
     }
+}

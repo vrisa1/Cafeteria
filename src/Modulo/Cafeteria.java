@@ -2,6 +2,7 @@ package Modulo;
 
 import Modulo.Excepciones.ContraseñaIncorrectaException;
 import Modulo.Excepciones.UsuarioNoExisteException;
+import Modulo.Excepciones.UsuarioYaExisteException;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.usuarios.Usuario;
@@ -19,7 +20,7 @@ public class Cafeteria {
         this.cantidadUsuarios=0;
     }
 
-    public boolean CrearUsuario(String nombre,String cont){
+    public boolean CrearUsuario(String nombre,String cont) throws UsuarioYaExisteException {
         boolean agregado = false;
         if(usuarios.buscar(nombre)==null){
             Usuario nuevo = new Usuario(nombre,cont);
@@ -28,7 +29,7 @@ public class Cafeteria {
             usuarios.agregar(nuevo.getNombreDeUsuario(),nuevo);
             agregado = true;
         }else {
-            //Exception usuario ya existe
+            throw new UsuarioYaExisteException("Usuario ya Existe");
         }
        return agregado;
     }
@@ -48,11 +49,9 @@ public class Cafeteria {
             }else{
                 throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
             }
-
         }else{
             throw new UsuarioNoExisteException("Usuario Incorrecto");
         }
-
         return ingreso;
     }
 

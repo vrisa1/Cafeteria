@@ -105,3 +105,4 @@ public class BebidaEnvasada extends Bebida {
         setGas(jsonObject.getBoolean("gas"));
         setLinea(jsonObject.getString("linea"));
     }
+    }
