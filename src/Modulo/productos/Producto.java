@@ -1,8 +1,9 @@
 package Modulo.productos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Producto {
+public abstract class Producto implements Serializable {
 
    //ATRIBUTOS--------------------------------------------------------------------------------------------------
     private String nombre;
@@ -10,6 +11,7 @@ public abstract class Producto {
     private boolean disponible;
     private int cantidadVendidos;
     private String descripcion;
+    private transient int cantidadEnCarrito; //para saber cuantos productos se estan comprando
 
     //CONSTRUCTORES----------------------------------------------------------------------------------------------
 
