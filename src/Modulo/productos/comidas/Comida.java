@@ -41,13 +41,12 @@ public class Comida extends Producto {
     @Override
     public boolean equals(Object obj) {
         boolean flag = false;
-        if(obj != null){
-            if(obj == this){
+        if (obj != null) {
+            if (obj == this) {
                 flag = true;
-            }
-            else if(obj instanceof Comida){
+            } else if (obj instanceof Comida) {
                 Comida aux = (Comida) obj;
-                if(getNombre().equals(aux.getNombre())){
+                if (getNombre().equals(aux.getNombre())) {
                     flag = true;
                 }
             }
@@ -88,4 +87,4 @@ public class Comida extends Producto {
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setParaCompartir(jsonObject.getBoolean("paraCompartir"));
     }
-
+}
