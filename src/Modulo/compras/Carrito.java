@@ -42,6 +42,7 @@ public class Carrito implements I_Json {
 
     //modificar
 
+    //JSON -----------------------------------------------------------------------------------------------------
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject jsonObject=new JSONObject();

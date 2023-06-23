@@ -51,6 +51,8 @@ public class Compra implements I_Json {
         this.metodoDePago = metodoDePago;
     }
 
+
+    //JSON -----------------------------------------------------------------------------------------------------
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject jsonCompra=new JSONObject();

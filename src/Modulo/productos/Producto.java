@@ -2,28 +2,39 @@ package Modulo.productos;
 
 import Modulo.json.I_Json;
 
-public abstract class Producto implements I_Json {
+import java.io.Serializable;
+
+public abstract class Producto implements Serializable, I_Json{
+
+   //ATRIBUTOS--------------------------------------------------------------------------------------------------
     private String nombre;
     private double precio;
     private boolean disponible;
     private int cantidadVendidos;
     private String descripcion;
+    private transient int cantidadEnCarrito; //para saber cuantos productos se estan comprando
+
+    //CONSTRUCTORES----------------------------------------------------------------------------------------------
 
     public Producto() {
         this.nombre = "";
         this.precio = 0;
-        this.disponible = true;
+        this.disponible = false;
         this.cantidadVendidos = 0;
         this.descripcion = "";
+        this.cantidadEnCarrito=0;
     }
 
-    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion) {
+    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito) {
         this.nombre = nombre;
         this.precio = precio;
         this.disponible = disponible;
         this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
+        this.cantidadEnCarrito=cantidadEnCarrito;
     }
+
+    //GETTERS Y SETTERS------------------------------------------------------------------------------------------
 
     public String getNombre() {
         return nombre;
@@ -65,7 +76,28 @@ public abstract class Producto implements I_Json {
         this.descripcion = descripcion;
     }
 
-    //temporal; para poder aumentar cuando se venden
+    public int getCantidadEnCarrito() {
+        return cantidadEnCarrito;
+    }
+
+    public void setCantidadEnCarrito(int cantidadEnCarrito) {
+        this.cantidadEnCarrito = cantidadEnCarrito;
+    }
+
+    //TOSTRING------------------------------------------------------------------------------------------------
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", disponible=" + disponible +
+                ", cantidadVendidos=" + cantidadVendidos +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
+
+    //para poder aumentar/disminuir cuando se venden
     public void aumentarCantidadVendidos(int cantidad){
         this.cantidadVendidos+=cantidad;
     }
