@@ -12,18 +12,16 @@ public class Contenedor<T> {
     }
 
     public boolean agregarProducto (T nuevo){
-        productos.add(nuevo);
-        return true;
+        return productos.add(nuevo);
     }
 
     public boolean quitarProducto (T nuevo){
-        productos.remove(nuevo);
-        return true;
+        return productos.remove(nuevo);
     }
 
     public String listar(){
         String lista="";
-        Iterator<T> it =productos.iterator();
+        Iterator<T> it = productos.iterator();
         while (it.hasNext()){
             lista = lista.concat(it.next().toString());
         }
