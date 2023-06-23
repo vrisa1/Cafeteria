@@ -1,9 +1,10 @@
 package Modulo.productos;
 
-import java.io.Serializable;
-import java.util.Objects;
+import Modulo.json.I_Json;
 
-public abstract class Producto implements Serializable {
+import java.io.Serializable;
+
+public abstract class Producto implements Serializable, I_Json{
 
    //ATRIBUTOS--------------------------------------------------------------------------------------------------
     private String nombre;
@@ -21,14 +22,16 @@ public abstract class Producto implements Serializable {
         this.disponible = false;
         this.cantidadVendidos = 0;
         this.descripcion = "";
+        this.cantidadEnCarrito=0;
     }
 
-    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion) {
+    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito) {
         this.nombre = nombre;
         this.precio = precio;
         this.disponible = disponible;
         this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
+        this.cantidadEnCarrito=cantidadEnCarrito;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------------------------------------------
@@ -73,6 +76,14 @@ public abstract class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public int getCantidadEnCarrito() {
+        return cantidadEnCarrito;
+    }
+
+    public void setCantidadEnCarrito(int cantidadEnCarrito) {
+        this.cantidadEnCarrito = cantidadEnCarrito;
+    }
+
     //TOSTRING------------------------------------------------------------------------------------------------
 
     @Override
@@ -86,4 +97,11 @@ public abstract class Producto implements Serializable {
                 '}';
     }
 
-}
+    //para poder aumentar/disminuir cuando se venden
+    public void aumentarCantidadVendidos(int cantidad){
+        this.cantidadVendidos+=cantidad;
+    }
+    public void disminuirCantidadVendidos(int cantidad){
+        this.cantidadVendidos-=cantidad;
+    }
+

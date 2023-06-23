@@ -3,6 +3,9 @@ package Modulo.productos.bebidas;
 import Modulo.productos.bebidas.Bebida;
 import Modulo.productos.comidas.Comida;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 public class BebidaEnvasada extends Bebida {
@@ -20,9 +23,8 @@ public class BebidaEnvasada extends Bebida {
         this.linea = "";
     }
 
-    public BebidaEnvasada(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion,
-                          double tamaño, boolean gas, String linea) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, tamaño);
+    public BebidaEnvasada(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, boolean gas, String linea) {
+        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
         this.gas = gas;
         this.linea = linea;
     }
@@ -35,6 +37,7 @@ public class BebidaEnvasada extends Bebida {
 
     public void setGas(boolean gas) {
         this.gas = gas;
+
     }
 
     public String getLinea() {
@@ -74,4 +77,31 @@ public class BebidaEnvasada extends Bebida {
                 '}';
     }
 
-}
+    //JSON -----------------------------------------------------------------------------------------------------
+    @Override
+    public JSONObject toJSON() throws JSONException {
+        JSONObject jsonBebida = new JSONObject();
+        jsonBebida.put("nombre", getNombre());
+        jsonBebida.put("precio", getPrecio());
+        jsonBebida.put("disponible", isDisponible());
+        jsonBebida.put("cantidadVendidos", getCantidadVendidos());
+        jsonBebida.put("descripcion", getDescripcion());
+        jsonBebida.put("cantidadEnCarrito", getCantidadEnCarrito());
+        jsonBebida.put("tamaño", getTamaño()); //claves con ñ?????
+        jsonBebida.put("gas", isGas());
+        jsonBebida.put("linea", getLinea());
+        return jsonBebida;
+    }
+
+    @Override
+    public void fromJSON(JSONObject jsonObject) throws JSONException {
+        setNombre(jsonObject.getString("nombre"));
+        setPrecio(jsonObject.getDouble("precio"));
+        setDisponible(jsonObject.getBoolean("disponible"));
+        setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
+        setDescripcion(jsonObject.getString("descripcion"));
+        setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
+        setTamaño(jsonObject.getDouble("tamaño"));
+        setGas(jsonObject.getBoolean("gas"));
+        setLinea(jsonObject.getString("linea"));
+    }

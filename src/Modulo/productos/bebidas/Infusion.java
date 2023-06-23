@@ -2,7 +2,12 @@ package Modulo.productos.bebidas;
 
 import Modulo.productos.bebidas.Bebida;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
+
 
 public class Infusion extends Bebida { //y otros
 
@@ -20,10 +25,9 @@ public class Infusion extends Bebida { //y otros
         //no se si dejar leche entera como default y cambiarla despues
         //o si eliminar el constructor vacio
     }
-
-    public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion,
-                    int tamaño, String temperatura, Leche tipoDeLeche) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, tamaño);
+  
+    public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, String temperatura, Leche tipoDeLeche) {
+        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
         this.temperatura = temperatura;
         this.tipoDeLeche = tipoDeLeche;
     }
@@ -75,4 +79,31 @@ public class Infusion extends Bebida { //y otros
                 '}';
     }
 
-}
+    //JSON -----------------------------------------------------------------------------------------------------
+    @Override
+    public JSONObject toJSON() throws JSONException {
+        JSONObject jsonInfusion = new JSONObject();
+        jsonInfusion.put("nombre", getNombre());
+        jsonInfusion.put("precio", getPrecio());
+        jsonInfusion.put("disponible", isDisponible());
+        jsonInfusion.put("cantidadVendidos", getCantidadVendidos());
+        jsonInfusion.put("descripcion", getDescripcion());
+        jsonInfusion.put("cantidadEnCarrito", getCantidadEnCarrito());
+        jsonInfusion.put("tamaño", getTamaño());
+        jsonInfusion.put("temperatura", getTemperatura());
+        jsonInfusion.put("tipoDeLeche", getTipoDeLeche());
+        return jsonInfusion;
+    }
+
+    @Override
+    public void fromJSON(JSONObject jsonObject) throws JSONException {
+        setNombre(jsonObject.getString("nombre"));
+        setPrecio(jsonObject.getDouble("precio"));
+        setDisponible(jsonObject.getBoolean("disponible"));
+        setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
+        setDescripcion(jsonObject.getString("descripcion"));
+        setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
+        setTamaño(jsonObject.getDouble("tamaño"));
+        setTemperatura(jsonObject.getString("temperatura"));
+        //setTipoDeLeche(jsonObject.getJSONObject("tipoDeLeche")); //como leo esto de json??
+    }
