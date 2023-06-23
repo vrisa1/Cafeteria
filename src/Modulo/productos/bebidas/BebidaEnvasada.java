@@ -53,14 +53,13 @@ public class BebidaEnvasada extends Bebida {
     @Override
     public boolean equals(Object obj) {
         boolean flag = false;
-        if(obj != null){
-            if(obj == this){
+        if (obj != null) {
+            if (obj == this) {
                 flag = true;
-            }
-            else if(obj instanceof BebidaEnvasada){
+            } else if (obj instanceof BebidaEnvasada) {
                 BebidaEnvasada aux = (BebidaEnvasada) obj;
-                if(getNombre().equals(aux.getNombre()) && getTamaño()==aux.getTamaño() &&
-                        getLinea().equals(aux.getLinea()) && isGas()==aux.isGas()){
+                if (getNombre().equals(aux.getNombre()) && getTamaño() == aux.getTamaño() &&
+                        getLinea().equals(aux.getLinea()) && isGas() == aux.isGas()) {
                     flag = true;
                 }
             }
@@ -105,3 +104,4 @@ public class BebidaEnvasada extends Bebida {
         setGas(jsonObject.getBoolean("gas"));
         setLinea(jsonObject.getString("linea"));
     }
+}
