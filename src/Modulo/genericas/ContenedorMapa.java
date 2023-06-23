@@ -32,6 +32,11 @@ public class ContenedorMapa<K,V> {
             }
             return lista;
         }
+
+
+        public Iterator<Map.Entry<K,V>> iterar(){
+            return elementos.entrySet().iterator();
+        }
     }
 
 
