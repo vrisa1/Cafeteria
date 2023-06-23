@@ -1,5 +1,7 @@
 package Modulo;
 
+import Modulo.Excepciones.ContraseñaIncorrectaException;
+import Modulo.Excepciones.UsuarioNoExisteException;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.usuarios.Usuario;
@@ -10,37 +12,48 @@ import java.util.Map;
 public class Cafeteria {
 
     private ContenedorMapa<String, Usuario> usuarios;
-
+    private int cantidadUsuarios;
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
+        this.cantidadUsuarios=0;
     }
 
-    public boolean AgregarUsuario(Usuario nuevo){
-        usuarios.agregar(nuevo.getId(),nuevo);
-        return true;
-    }
-
-
-    public void login(String usuario,String cont){
-        Usuario encontrado = null;
-        Usuario aux = new Usuario();
-        aux.setNombreDeUsuario(usuario);
-        Iterator<Map.Entry<String,Usuario>> it = usuarios.iterar();
-        while (it.hasNext()){
-                Usuario otroAux = it.next().getValue();
-            if(otroAux.equals(aux)){
-                encontrado = otroAux;
-            }// else exception usuario inválido;
+    public boolean CrearUsuario(String nombre,String cont){
+        boolean agregado = false;
+        if(usuarios.buscar(nombre)==null){
+            Usuario nuevo = new Usuario(nombre,cont);
+            cantidadUsuarios++;
+            nuevo.setId(String.valueOf(cantidadUsuarios));
+            usuarios.agregar(nuevo.getNombreDeUsuario(),nuevo);
+            agregado = true;
+        }else {
+            //Exception usuario ya existe
         }
-        if(encontrado.getContraseña().equals(cont)){
-            if(encontrado.isAdministrador()){
-                //JFrame admin
+       return agregado;
+    }
+
+
+    public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
+        Usuario encontrado = usuarios.buscar(usuario);
+        int ingreso=0;
+
+        if(encontrado!=null){
+            if(encontrado.getContraseña().equals(cont)){
+                if(encontrado.isAdministrador()){
+                   ingreso =1; ///Ingreso admin
+                }else{
+                    ingreso=2;///Ingreso cliente
+                }
             }else{
-                //JFrame cliente
+                throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
             }
-        }//else exception contraseña incorrecta
-        System.out.println(encontrado);
+
+        }else{
+            throw new UsuarioNoExisteException("Usuario Incorrecto");
+        }
+
+        return ingreso;
     }
 
 

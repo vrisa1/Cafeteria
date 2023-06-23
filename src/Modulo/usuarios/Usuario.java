@@ -3,17 +3,17 @@ package Modulo.usuarios;
 import java.util.Objects;
 
 public class Usuario {
-    private String id;
+    private String id;///para que?
     private String nombreDeUsuario;
     private String contraseña;
     private boolean administrador;
 
 
-    public Usuario(String id, String nombreDeUsuario, String contraseña, boolean administrador) {
-        this.id = id;
+    public Usuario(String nombreDeUsuario, String contraseña) {
+        this.id = "0";
         this.nombreDeUsuario = nombreDeUsuario;
         this.contraseña = contraseña;
-        this.administrador = administrador;
+        this.administrador = false;
     }
 
     public Usuario() {
