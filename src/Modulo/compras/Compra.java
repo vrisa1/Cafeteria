@@ -2,6 +2,7 @@ package Modulo.compras;
 
 import Modulo.compras.Carrito;
 import Modulo.json.I_Json;
+import Modulo.productos.bebidas.Leche;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,14 +17,14 @@ public class Compra implements I_Json {
     public Compra() {
         this.numeroTicket = 0;
         this.fechaHora = "";
-        this.metodoDePago = MetodosDePago.EFECTIVO;
+        this.metodoDePago = null;
         this.carrito = new Carrito();
     }
 
     public Compra(int numeroTicket) {
         this.numeroTicket = numeroTicket;
         this.fechaHora = new Date().toString();
-        this.metodoDePago = MetodosDePago.EFECTIVO;
+        this.metodoDePago = null;
         this.carrito = new Carrito();
     }
 
@@ -52,13 +53,19 @@ public class Compra implements I_Json {
     }
 
 
+    //donde va la compra? como se compra? :/
+    public void realizarCompra(){
+        Carrito nuevo = new Carrito();
+    }
+
+
     //JSON -----------------------------------------------------------------------------------------------------
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject jsonCompra=new JSONObject();
         jsonCompra.put("numeroTicket", getNumeroTicket());
         jsonCompra.put("fechaHora", getFechaHora());
-        jsonCompra.put("metodoDePago", getMetodoDePago());
+        jsonCompra.put("metodoDePago", getMetodoDePago().name());
         jsonCompra.put("carrito", carrito.toJSON());
         return jsonCompra;
     }
@@ -67,7 +74,14 @@ public class Compra implements I_Json {
     public void fromJSON(JSONObject jsonObject) throws JSONException {
         setNumeroTicket(jsonObject.getInt("numeroTicket"));
         setFechaHora(jsonObject.getString("fechaHora"));
-        //setMetodoDePago(jsonObject.getJSONObject("metodoDePago")); //enum
+        String aux= jsonObject.getString("metodoDePago");
+        if(aux.equals(MetodosDePago.EFECTIVO.name())){
+            setMetodoDePago(MetodosDePago.EFECTIVO);
+        } else if(aux.equals(MetodosDePago.DEBITO.name())){
+            setMetodoDePago(MetodosDePago.DEBITO);
+        } else {
+            setMetodoDePago(MetodosDePago.CREDITO);
+        }
         carrito.fromJSON(jsonObject.getJSONObject("carrito"));
     }
 }
