@@ -1,9 +1,13 @@
+
 import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.BebidaEnvasada;
 import Modulo.productos.bebidas.Infusion;
 import Modulo.productos.bebidas.Leche;
 import Modulo.productos.comidas.Comida;
+import Modulo.Cafeteria;
+
+
 import Modulo.usuarios.Usuario;
 import Modulo.genericas.ContenedorMapa;
 
@@ -13,14 +17,22 @@ import java.util.Iterator;
 public class Main {
     public static void main(String[] args) {
 
-        /*ContenedorMapa<String, Usuario> usuarios = new ContenedorMapa<>();
-        Usuario uno = new Cliente("1","primero","1234");
 
-        usuarios.agregar(uno.getId(),uno);
+        Cafeteria cafeteria = new Cafeteria();
 
-        //System.out.println(usuarios.listar());
-        Leche leche = Leche.VACA;
-        System.out.println(leche);*/
+
+
+        try {
+            cafeteria.CrearUsuario("aa","1234");
+
+            int ingreso = cafeteria.login("aa","1234");
+            System.out.println(ingreso);
+        }catch (Exception e){
+
+        }
+
+
+
 
 
 
@@ -31,7 +43,6 @@ public class Main {
             Producto aux = (BebidaEnvasada) it.next();
             System.out.println(aux.toString());
         }
-
 
 
     }
