@@ -1,12 +1,13 @@
 package Modulo.InterfazGrafica;
 
+import Modulo.Cafeteria;
+import Modulo.Excepciones.ContraseñaIncorrectaException;
+import Modulo.Excepciones.UsuarioNoExisteException;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.*;
-import java.beans.PropertyChangeListener;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class Login extends JFrame{
     private JFormattedTextField nombreUsuario;
@@ -14,8 +15,9 @@ public class Login extends JFrame{
     private JButton ingresarButton;
     private JPanel jpanel;
     private JButton crearUsusarioButton;
+    private JButton salirButton;
 
-    public Login() {
+    public Login(Cafeteria cafeteria) {
 
 
 
@@ -35,21 +37,28 @@ public class Login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                    String usuario = (String) nombreUsuario.getValue();
-                    String pas = Arrays.toString(passwordField1.getPassword());
-                    ////Como se llama al método de cafetería?
+                    String usuario = nombreUsuario.getText();
+                    String pas = new String(passwordField1.getPassword());
+                    try {
+                        int ingreso = cafeteria.login(usuario,pas);
+                        if(ingreso==1){
+                            setVisible(false);
+                            InterfazAdmin interfazAdmin = new InterfazAdmin(cafeteria);
+                        }else {
+                            setVisible(false);
+                            JOptionPane.showMessageDialog(null,ingreso);///acceso interfaz usuario
+                        }
+                    }catch (UsuarioNoExisteException | ContraseñaIncorrectaException ex){
+                        JOptionPane.showMessageDialog(null,ex.getMessage());
+                    }
+
                 }
             }
         );
 
-        nombreUsuario.addContainerListener(new ContainerAdapter() {
-            @Override
-            public void componentAdded(ContainerEvent e) {
-                ingresarButton.setEnabled(true);
-            }
-        });
 
-        passwordField1.getDocument().addDocumentListener(new DocumentListener() {
+        /*
+       passwordField1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 changed();
@@ -74,7 +83,7 @@ public class Login extends JFrame{
 
             }
         });
-
+        */
         nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -101,6 +110,18 @@ public class Login extends JFrame{
 
             }
 
+        });
+        crearUsusarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CrearUsuario crearUsuario = new CrearUsuario(cafeteria);
+            }
+        });
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
     }
 
