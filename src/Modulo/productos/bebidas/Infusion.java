@@ -105,7 +105,12 @@ public class Infusion extends Bebida { //y otros
         String aux= jsonObject.getString("tipoDeLeche");
         if(aux.equals(Leche.ENTERA.name())){
             setTipoDeLeche(Leche.ENTERA);
+        } else if(aux.equals(Leche.ALMENDRA.name())){
+            setTipoDeLeche(Leche.ALMENDRA);
+        } else if(aux.equals(Leche.COCO.name())) {
+            setTipoDeLeche(Leche.COCO);
+        } else {
+            setTipoDeLeche(Leche.DESLACTOSADA);
         }
-        //setTipoDeLeche(jsonObject.getJSONObject("tipoDeLeche")); //como leo esto de json??
     }
 }

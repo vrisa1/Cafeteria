@@ -24,6 +24,10 @@ public class ContenedorMapa<K,V> {
             return true;
         }
 
+        public int contar(){
+            return elementos.size();
+        }
+
         public String listar(){
             String lista="";
             Iterator<Map.Entry<K,V>> it =elementos.entrySet().iterator();
