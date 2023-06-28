@@ -1,36 +1,39 @@
 package Modulo.usuarios;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Usuario {
-    private String id;///para que?
+public class Usuario implements Serializable {
     private String nombreDeUsuario;
     private String contraseña;
+    private  String mail;
     private boolean administrador;
 
 
-    public Usuario(String nombreDeUsuario, String contraseña) {
-        this.id = "0";
+    public Usuario(String nombreDeUsuario, String contraseña, String mail) {
         this.nombreDeUsuario = nombreDeUsuario;
         this.contraseña = contraseña;
         this.administrador = false;
+        this.mail= mail;
     }
 
     public Usuario() {
-        this.id = "";
+        this.nombreDeUsuario = "";
         this.contraseña = "";
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.administrador = false;
+        this.mail = "";
     }
 
     public String getNombreDeUsuario() {
         return nombreDeUsuario;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public boolean isAdministrador() {
@@ -52,9 +55,10 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "id='" + id + '\'' +
-                ", nombreDeUsuario='" + nombreDeUsuario + '\'' +
+                "nombreDeUsuario='" + nombreDeUsuario + '\'' +
                 ", contraseña='" + contraseña + '\'' +
+                ", mail='" + mail + '\'' +
+                ", administrador=" + administrador +
                 '}';
     }
 
@@ -71,5 +75,5 @@ public class Usuario {
         return 1;
     }
 
-    //metodo crear usuario
+
 }
