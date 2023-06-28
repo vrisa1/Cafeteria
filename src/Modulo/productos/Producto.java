@@ -100,6 +100,7 @@ public abstract class Producto implements Serializable, I_Json {
     //para poder aumentar/disminuir cuando se venden
     public void aumentarCantidadVendidos(int cantidad) {
         this.cantidadVendidos += cantidad;
+
     }
 }
 
@@ -109,6 +110,8 @@ public abstract class Producto implements Serializable, I_Json {
 
     public void disminuirCantidadEnCarrito(int cantidad) {
         this.cantidadEnCarrito -= cantidad;
+
     }
 }
 
+}
