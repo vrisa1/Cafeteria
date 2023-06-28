@@ -10,8 +10,8 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
 
     //CARGAR ARCHIVOS-----------------------------------------------------------------------------------------
 
-    public static void grabar(HashSet<Producto> productos, String nombreClase){
-        String nombreArchivo = nombreClase.toLowerCase() + ".dat";
+    public static void grabar(HashSet<Producto> productos, String nombreArchivo){
+        //String nombreArchivo = nombreClase.toLowerCase() + ".dat";
         FileOutputStream salidaBinario = null;
         ObjectOutputStream salidaObjetos = null;
         try{
@@ -44,13 +44,13 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
 
     //LEER ARCHIVOS-------------------------------------------------------------------------------------------
 
-    public static HashSet<Producto> leer(String nombreClase) {
+    public static HashSet<Producto> leer(String nombreArchivo) {
         //String nombreArchivo = nombreClase.toLowerCase() + ".dat";
         HashSet<Producto> productos = new HashSet<>();
         FileInputStream entradaBinario = null;
         ObjectInputStream entradaObjetos = null;
         try{
-            entradaBinario = new FileInputStream(nombreClase);
+            entradaBinario = new FileInputStream(nombreArchivo);
             entradaObjetos = new ObjectInputStream(entradaBinario);
             while(true){
                 Producto aux = (Producto) entradaObjetos.readObject();
