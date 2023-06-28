@@ -4,6 +4,8 @@ import Modulo.Excepciones.ContraseñaIncorrectaException;
 import Modulo.Excepciones.UsuarioNoExisteException;
 import Modulo.compras.Compra;
 import Modulo.compras.MetodosDePago;
+import Modulo.Excepciones.UsuarioYaExisteException;
+import Modulo.InterfazGrafica.InterfazAdmin;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
@@ -18,7 +20,7 @@ import java.util.Map;
 public class Cafeteria {
 
     private ContenedorMapa<String, Usuario> usuarios;
-    private int cantidadUsuarios;
+    private int cantidadUsuarios; /// se usa?
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
@@ -28,18 +30,17 @@ public class Cafeteria {
         this.cantidadCompras=0;
     }
 
-    public boolean CrearUsuario(String nombre,String cont){
+    public boolean CrearUsuario(String nombre,String cont,String mail) throws UsuarioYaExisteException {
         boolean agregado = false;
         if(usuarios.buscar(nombre)==null){
-            Usuario nuevo = new Usuario(nombre,cont);
-            cantidadUsuarios++;
-            nuevo.setId(String.valueOf(cantidadUsuarios));
-            usuarios.agregar(nuevo.getNombreDeUsuario(),nuevo);
+            Usuario nuevo = new Usuario(nombre,cont,mail);
+            //cantidadUsuarios++;
+           usuarios.agregar(nuevo.getNombreDeUsuario(),nuevo);
             agregado = true;
         }else {
-            //Exception usuario ya existe
+            throw new UsuarioYaExisteException("Usuario ya Existe");
         }
-       return agregado;
+       return agregado; /// sacar retornos?
     }
 
 
@@ -57,17 +58,42 @@ public class Cafeteria {
             }else{
                 throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
             }
-
         }else{
             throw new UsuarioNoExisteException("Usuario Incorrecto");
         }
-
         return ingreso;
     }
 
-    //COMPRAS
 
-    private ContenedorMapa<Integer, Compra> compras;
+
+    public boolean modificarUsuario(String usuario,String mail,String cont){
+        boolean modif= false;
+        if(usuarios.buscar(usuario)!=null){
+            Usuario aux = usuarios.buscar(usuario);
+            aux.setMail(mail);
+            aux.setContraseña(cont);
+            modif = true;
+        }
+        return modif;
+    }
+
+    public String mostrar(){
+        return usuarios.listar();
+    }
+
+    public String eliminarUsuario(String usuario) throws UsuarioNoExisteException {
+        String eliminado="";
+        if(!usuarios.quitar(usuario)){
+            throw new UsuarioNoExisteException("Usuario no Existe");
+        }else{
+            eliminado= "Eliminado con éxito";
+        }
+        return eliminado;
+    }
+
+
+    //COMPRAS
+	private ContenedorMapa<Integer, Compra> compras;
     private int cantidadCompras; //para el numero de ticket
 
     public int getCantidadCompras() {

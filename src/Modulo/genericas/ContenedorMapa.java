@@ -19,9 +19,8 @@ public class ContenedorMapa<K,V> {
             return true;
         }
 
-        public boolean quitar (K clave, V valor){
-            elementos.remove(clave,valor);
-            return true;
+        public boolean quitar (K clave){
+            return elementos.remove(clave) != null;
         }
 
         public int contar(){
@@ -40,7 +39,7 @@ public class ContenedorMapa<K,V> {
 
         public Iterator<Map.Entry<K,V>> iterar(){ //eliminar si no hace falta
             return elementos.entrySet().iterator();
-        }
+        }///si no se usa sacar
 
         public V buscar(K clave){
             return elementos.get(clave);
