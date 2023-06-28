@@ -101,7 +101,7 @@ public abstract class Producto implements Serializable, I_Json {
     public void aumentarCantidadVendidos(int cantidad) {
         this.cantidadVendidos += cantidad;
     }
-}
+
 
     public void disminuirCantidadVendidos(int cantidad) {
         this.cantidadVendidos -= cantidad;

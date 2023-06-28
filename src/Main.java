@@ -1,26 +1,20 @@
 import Modulo.Cafeteria;
-import Modulo.productos.bebidas.Leche;
-import Modulo.usuarios.Usuario;
-import Modulo.genericas.ContenedorMapa;
+import Modulo.InterfazGrafica.CrearUsuario;
+import Modulo.InterfazGrafica.Login;
 
 public class Main {
     public static void main(String[] args) {
 
         Cafeteria cafeteria = new Cafeteria();
 
+        cafeteria.crearAdmin();
 
-
-        try {
-            cafeteria.CrearUsuario("aa","1234");
-
-            int ingreso = cafeteria.login("aa","1234");
-            System.out.println(ingreso);
-        }catch (Exception e){
-
-        }
+        //CrearUsuario crearUsuario = new CrearUsuario(cafeteria);
 
 
 
+        Login login = new Login(cafeteria);
+        //InterfazAdmin interfazAdmin= new InterfazAdmin();
 
 
 
