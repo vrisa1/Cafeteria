@@ -20,21 +20,30 @@ import java.util.Map;
 public class Cafeteria {
 
     private ContenedorMapa<String, Usuario> usuarios;
-    private int cantidadUsuarios; /// se usa?
+    private ContenedorMapa<Integer, Compra> compras;
+    private int cantidadCompras; //para el numero de ticket
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
-        this.cantidadUsuarios=0;
-
         this.compras= new ContenedorMapa<>();
         this.cantidadCompras=0;
     }
+
+    public int getCantidadCompras() {
+        return cantidadCompras;
+    }
+
+    public void setCantidadCompras(int cantidadCompras) {
+        this.cantidadCompras = cantidadCompras;
+    }
+
+
+    //USUARIOS------------------------------------------------------------------------------------------------------
 
     public boolean CrearUsuario(String nombre,String cont,String mail) throws UsuarioYaExisteException {
         boolean agregado = false;
         if(usuarios.buscar(nombre)==null){
             Usuario nuevo = new Usuario(nombre,cont,mail);
-            //cantidadUsuarios++;
            usuarios.agregar(nuevo.getNombreDeUsuario(),nuevo);
             agregado = true;
         }else {
@@ -42,7 +51,6 @@ public class Cafeteria {
         }
        return agregado; /// sacar retornos?
     }
-
 
     public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
         Usuario encontrado = usuarios.buscar(usuario);
@@ -63,8 +71,6 @@ public class Cafeteria {
         }
         return ingreso;
     }
-
-
 
     public boolean modificarUsuario(String usuario,String mail,String cont){
         boolean modif= false;
@@ -92,17 +98,7 @@ public class Cafeteria {
     }
 
 
-    //COMPRAS
-	private ContenedorMapa<Integer, Compra> compras;
-    private int cantidadCompras; //para el numero de ticket
-
-    public int getCantidadCompras() {
-        return cantidadCompras;
-    }
-
-    public void setCantidadCompras(int cantidadCompras) {
-        this.cantidadCompras = cantidadCompras;
-    }
+    //COMPRAS--------------------------------------------------------------------------------------------------------
 
     public void iniciarCompras() throws JSONException {
 

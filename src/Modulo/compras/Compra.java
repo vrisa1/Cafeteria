@@ -87,26 +87,22 @@ public class Compra implements I_Json {
         producto.setCantidadEnCarrito(0);
     }
 
-    //no se si disminuir la cantidad deberia ser una opcion de eliminar o de modificar,
-    // o sea que eliminar saque el producto y todas sus unidades
-    public void eliminarDelCarrito(Producto producto, int cantidad){ //nombre: modificarCantidad
+    public void modificarCantidad(Producto producto, int cantidad){
         if (producto.getCantidadEnCarrito()>cantidad){
             producto.disminuirCantidadEnCarrito(cantidad);
             producto.disminuirCantidadVendidos(cantidad);
             precioTotal-= (producto.getPrecio() * cantidad);
-        } else if(producto.getCantidadEnCarrito()==cantidad){
-            eliminarDelCarrito(producto);
-        } else { //la cantidad que quiere sacar es mayor a la existente
+        } else {
+            //si la cantidad que quiere sacar es mayor a la existente
             //no se si ignorarlo y hacer esto:
             //eliminarDelCarrito(producto);
             //o tirar una excepcion
+            eliminarDelCarrito(producto);
         }
     }
-    //modificar
+
 
     //toString
-
-
     @Override
     public String toString() {
         return "Compra{" +
