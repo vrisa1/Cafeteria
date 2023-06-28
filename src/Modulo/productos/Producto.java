@@ -4,9 +4,9 @@ import Modulo.json.I_Json;
 
 import java.io.Serializable;
 
-public abstract class Producto implements Serializable, I_Json{
+public abstract class Producto implements Serializable, I_Json {
 
-   //ATRIBUTOS--------------------------------------------------------------------------------------------------
+    //ATRIBUTOS--------------------------------------------------------------------------------------------------
     private String nombre;
     private double precio;
     private boolean disponible;
@@ -22,7 +22,7 @@ public abstract class Producto implements Serializable, I_Json{
         this.disponible = false;
         this.cantidadVendidos = 0;
         this.descripcion = "";
-        this.cantidadEnCarrito=0;
+        this.cantidadEnCarrito = 0;
     }
 
     public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito) {
@@ -31,7 +31,7 @@ public abstract class Producto implements Serializable, I_Json{
         this.disponible = disponible;
         this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
-        this.cantidadEnCarrito=cantidadEnCarrito;
+        this.cantidadEnCarrito = cantidadEnCarrito;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------------------------------------------
@@ -98,11 +98,17 @@ public abstract class Producto implements Serializable, I_Json{
     }
 
     //para poder aumentar/disminuir cuando se venden
-    public void aumentarCantidadVendidos(int cantidad){
-        this.cantidadVendidos+=cantidad;
+    public void aumentarCantidadVendidos(int cantidad) {
+        this.cantidadVendidos += cantidad;
     }
-    public void disminuirCantidadVendidos(int cantidad){
-        this.cantidadVendidos-=cantidad;
+}
+
+    public void disminuirCantidadVendidos(int cantidad) {
+        this.cantidadVendidos -= cantidad;
+    }
+
+    public void disminuirCantidadEnCarrito(int cantidad) {
+        this.cantidadEnCarrito -= cantidad;
     }
 }
 

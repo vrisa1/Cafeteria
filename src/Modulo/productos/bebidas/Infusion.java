@@ -21,9 +21,7 @@ public class Infusion extends Bebida { //y otros
     public Infusion() {
         super();
         this.temperatura = "";
-        this.tipoDeLeche = Leche.ENTERA;
-        //no se si dejar leche entera como default y cambiarla despues
-        //o si eliminar el constructor vacio
+        this.tipoDeLeche = null;
     }
 
     public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, String temperatura, Leche tipoDeLeche) {
@@ -90,7 +88,7 @@ public class Infusion extends Bebida { //y otros
         jsonInfusion.put("cantidadEnCarrito", getCantidadEnCarrito());
         jsonInfusion.put("tamaño", getTamaño());
         jsonInfusion.put("temperatura", getTemperatura());
-        jsonInfusion.put("tipoDeLeche", getTipoDeLeche());
+        jsonInfusion.put("tipoDeLeche", getTipoDeLeche().name());
         return jsonInfusion;
     }
 
@@ -104,6 +102,15 @@ public class Infusion extends Bebida { //y otros
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setTamaño(jsonObject.getDouble("tamaño"));
         setTemperatura(jsonObject.getString("temperatura"));
-        //setTipoDeLeche(jsonObject.getJSONObject("tipoDeLeche")); //como leo esto de json??
+        String aux= jsonObject.getString("tipoDeLeche");
+        if(aux.equals(Leche.ENTERA.name())){
+            setTipoDeLeche(Leche.ENTERA);
+        } else if(aux.equals(Leche.ALMENDRA.name())){
+            setTipoDeLeche(Leche.ALMENDRA);
+        } else if(aux.equals(Leche.COCO.name())) {
+            setTipoDeLeche(Leche.COCO);
+        } else {
+            setTipoDeLeche(Leche.DESLACTOSADA);
+        }
     }
 }
