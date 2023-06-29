@@ -29,6 +29,10 @@ public class Usuario implements Serializable {
 
     //GETTERS Y SETTERS---------------------------------------------------------------------------------------------
 
+    public String getMail() {
+        return mail;
+    }
+
     public String getNombreDeUsuario() {
         return nombreDeUsuario;
     }

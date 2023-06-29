@@ -1,6 +1,7 @@
 
 
 import Modulo.Excepciones.ContraseñaIncorrectaException;
+import Modulo.InterfazGrafica.InterfazAdmin;
 import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.Bebida;
@@ -43,7 +44,7 @@ public class Main {
         //ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
         //System.out.println(usuarios.listar());
 
-
+        cafe.crearAdmin();
         InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
 
     }

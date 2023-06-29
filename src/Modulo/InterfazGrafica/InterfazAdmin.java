@@ -5,7 +5,8 @@ import Modulo.productos.Producto;
 import Modulo.productos.bebidas.BebidaEnvasada;
 import Modulo.productos.bebidas.Infusion;
 import Modulo.productos.comidas.Comida;
-import Modulo.productos.comidas.Usuario;
+import Modulo.usuarios.Usuario;
+
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -38,7 +39,7 @@ public class InterfazAdmin extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        /*
+
         modelUsuarios = new DefaultTableModel();
 
         String[] colUsuarios ={"Nombre de Usuario","Mail","Administrador"};
@@ -48,12 +49,10 @@ public class InterfazAdmin extends JFrame{
         int u =0;
         while (itUsuarios.hasNext()){
             String[] usuarios = new String[colUsuarios.length];
-            Usuario aux = (Usuario) itUsuarios.next();
-            usuarios[0] = aux.getNombre();
-            usuarios[1] = aux.getDescripcion();
-            usuarios[2] = new String("$"+ String.valueOf(aux.getPrecio()));
-            usuarios[3] = String.valueOf(aux.isParaCompartir());
-            usuarios[4] = String.valueOf(aux.isDisponible());
+            Usuario aux = (Usuario) itUsuarios.next().getValue();
+            usuarios[0] = aux.getNombreDeUsuario();
+            usuarios[1] = aux.getMail();
+            usuarios[2] = String.valueOf(aux.isAdministrador());
             listaUsuarios[u++] = usuarios;
         }
 
@@ -62,7 +61,7 @@ public class InterfazAdmin extends JFrame{
 
         tablaUsuarios.setModel(modelUsuarios);
 
-        */
+
 
 
 
