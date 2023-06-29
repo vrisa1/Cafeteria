@@ -6,14 +6,11 @@ import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.compras.Compra;
 import Modulo.compras.MetodosDePago;
 import Modulo.Excepciones.UsuarioYaExisteException;
-import Modulo.InterfazGrafica.InterfazAdmin;
 import Modulo.genericas.Contenedor;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
 import Modulo.productos.Producto;
-import Modulo.productos.bebidas.Bebida;
-import Modulo.productos.comidas.Comida;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,6 +111,13 @@ public class Cafeteria {
         return eliminado;
     }
 
+    public Iterator<Map.Entry<String, Usuario>> iterarUsuarios(){
+        return usuarios.iterar();
+    }
+
+    public int cantUsuarios(){
+        return usuarios.contar();
+    }
     public void cargarUsuarios(){
         ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
     }
@@ -176,10 +180,22 @@ public class Cafeteria {
         return  comidas.iterar();
     }
 
-    public int cantBebidas(){
+    public Iterator<Producto> iterarInfusiones(){
+        return infusiones.iterar();
+    }
+    public Iterator<Producto> iterarEnvasadas(){
+        return bebidasEnvasadas.iterar();
+    }
+    public int cantComidas(){
         return comidas.contar();
     }
 
+    public int cantInfusiones(){
+        return infusiones.contar();
+    }
+    public int cantEnvasadas(){
+        return bebidasEnvasadas.contar();
+    }
     /*
     public String[] menuComida(){
         String[] menu = null;

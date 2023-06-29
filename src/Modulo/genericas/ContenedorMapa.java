@@ -39,7 +39,7 @@ public class ContenedorMapa<K,V> {
 
         public Iterator<Map.Entry<K,V>> iterar(){ //eliminar si no hace falta
             return elementos.entrySet().iterator();
-        }///si no se usa sacar
+        }
 
         public V buscar(K clave){
             return elementos.get(clave);

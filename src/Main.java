@@ -24,8 +24,8 @@ public class Main {
     public static void main(String[] args) {
 
         //PRUEBAS ARCHIVOS PRODUCTOS
-        //Cafeteria cafe = new Cafeteria();
-        //cafe.cargarMenu();
+        Cafeteria cafe = new Cafeteria();
+        cafe.cargarMenu();
         //System.out.println("\n" + cafe.mostrarMenu());
 
         //PRUEBAS ARCHIVOS USUARIOS
@@ -38,11 +38,12 @@ public class Main {
         usuarios.agregar(u3.getNombreDeUsuario(),u3);
         ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);*/
 
-        ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
-        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
-        System.out.println(usuarios.listar());
+        //ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
+        //ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+        //System.out.println(usuarios.listar());
 
 
+        InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
 
     }
 }
