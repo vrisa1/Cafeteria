@@ -59,7 +59,7 @@ public class Comida extends Producto {
         return "Comida{" +
                 super.toString() +
                 "paraCompartir=" + paraCompartir +
-                '}';
+                '}' + "\n";
     }
 
 
