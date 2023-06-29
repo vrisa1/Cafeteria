@@ -1,5 +1,6 @@
 package Modulo.archivos;
 
+import Modulo.genericas.Contenedor;
 import Modulo.productos.Producto;
 
 import java.io.*;
@@ -10,7 +11,7 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
 
     //CARGAR ARCHIVOS-----------------------------------------------------------------------------------------
 
-    public static void grabar(HashSet<Producto> productos, String nombreArchivo){
+    public static void grabar(String nombreArchivo, Contenedor<Producto> productos){
         //String nombreArchivo = nombreClase.toLowerCase() + ".dat";
         FileOutputStream salidaBinario = null;
         ObjectOutputStream salidaObjetos = null;
@@ -18,7 +19,7 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
             salidaBinario = new FileOutputStream(nombreArchivo);
             salidaObjetos = new ObjectOutputStream(salidaBinario);
             Producto aux;
-            Iterator<Producto> it = productos.iterator();
+            Iterator<Producto> it = productos.iterar();
             while(it.hasNext()){
                 aux = it.next();
                 salidaObjetos.writeObject(aux);
@@ -44,9 +45,9 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
 
     //LEER ARCHIVOS-------------------------------------------------------------------------------------------
 
-    public static HashSet<Producto> leer(String nombreArchivo) {
+    public static void leer(String nombreArchivo, Contenedor<Producto> productos) {
         //String nombreArchivo = nombreClase.toLowerCase() + ".dat";
-        HashSet<Producto> productos = new HashSet<>();
+        //HashSet<Producto> productos = new HashSet<>();
         FileInputStream entradaBinario = null;
         ObjectInputStream entradaObjetos = null;
         try{
@@ -54,7 +55,7 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
             entradaObjetos = new ObjectInputStream(entradaBinario);
             while(true){
                 Producto aux = (Producto) entradaObjetos.readObject();
-                productos.add(aux);
+                productos.agregarProducto(aux);
             }
         }
         catch(EOFException e){
@@ -80,7 +81,6 @@ public class ControladorArchivosObjetos { //Para manipular los archivos de produ
                 e.printStackTrace();
             }
         }
-        return productos;
     }
 
 }
