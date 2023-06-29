@@ -107,6 +107,13 @@ public class Cafeteria {
         return eliminado;
     }
 
+    public void cargarUsuarios(){
+        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+    }
+
+    public void actualizarUsuarios(){
+        ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);
+    }
 
     //COMPRAS--------------------------------------------------------------------------------------------------------
 

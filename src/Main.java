@@ -12,17 +12,32 @@ import Modulo.Cafeteria;
 import Modulo.usuarios.Usuario;
 import Modulo.genericas.ContenedorMapa;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
 
-        Cafeteria cafe = new Cafeteria();
+        //PRUEBAS ARCHIVOS PRODUCTOS
+        //Cafeteria cafe = new Cafeteria();
+        //cafe.cargarMenu();
+        //System.out.println("\n" + cafe.mostrarMenu());
 
-        cafe.cargarMenu();
+        //PRUEBAS ARCHIVOS USUARIOS
+        /*Usuario u1 = new Usuario("pepe","123","pepe@gmail.com");
+        Usuario u2 = new Usuario("juan","456","juan@gmail.com");
+        Usuario u3 = new Usuario("maria","789","maria@gmail.com");
+        ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
+        usuarios.agregar(u1.getNombreDeUsuario(),u1);
+        usuarios.agregar(u2.getNombreDeUsuario(),u2);
+        usuarios.agregar(u3.getNombreDeUsuario(),u3);
+        ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);*/
 
-        System.out.println("\n" + cafe.mostrarMenu());
+        ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
+        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+        System.out.println(usuarios.listar());
+
 
 
     }
