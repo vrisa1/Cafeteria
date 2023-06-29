@@ -73,7 +73,7 @@ public class BebidaEnvasada extends Bebida {
                 super.toString() +
                 "gas=" + gas +
                 ", linea='" + linea + '\'' +
-                '}';
+                '}' + "\n";
     }
 
     //JSON -----------------------------------------------------------------------------------------------------

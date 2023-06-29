@@ -2,13 +2,16 @@ package Modulo;
 
 import Modulo.Excepciones.ContraseñaIncorrectaException;
 import Modulo.Excepciones.UsuarioNoExisteException;
+import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.compras.Compra;
 import Modulo.compras.MetodosDePago;
 import Modulo.Excepciones.UsuarioYaExisteException;
 import Modulo.InterfazGrafica.InterfazAdmin;
+import Modulo.genericas.Contenedor;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
+import Modulo.productos.Producto;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,10 +26,17 @@ public class Cafeteria {
     private ContenedorMapa<Integer, Compra> compras;
     private int cantidadCompras; //para el numero de ticket
 
+    private Contenedor<Producto> comidas;
+    private Contenedor<Producto> infusiones;
+    private Contenedor<Producto> bebidasEnvasadas;
+
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
         this.compras= new ContenedorMapa<>();
         this.cantidadCompras=0;
+        this.comidas = new Contenedor<>();
+        this.infusiones = new Contenedor<>();
+        this.bebidasEnvasadas = new Contenedor<>();
     }
 
     public int getCantidadCompras() {
@@ -50,6 +60,11 @@ public class Cafeteria {
             throw new UsuarioYaExisteException("Usuario ya Existe");
         }
        return agregado; /// sacar retornos?
+    }
+    public boolean crearAdmin(){
+        Usuario admin = new Usuario("admin","1234","");
+        admin.setAdministrador(true);
+        return usuarios.agregar(admin.getNombreDeUsuario(),admin);
     }
 
     public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
@@ -97,6 +112,13 @@ public class Cafeteria {
         return eliminado;
     }
 
+    public void cargarUsuarios(){
+        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+    }
+
+    public void actualizarUsuarios(){
+        ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);
+    }
 
     //COMPRAS--------------------------------------------------------------------------------------------------------
 
@@ -133,4 +155,27 @@ public class Cafeteria {
         }
         JsonUtiles.grabar(jsonArray, "compras");
     }
+
+    //PRODUCTOS--------------------------------------------------------------------------------------------------------
+
+    public void cargarMenu(){
+        ControladorArchivosObjetos.leer("Comida.dat",comidas);
+        ControladorArchivosObjetos.leer("Infusion.dat",infusiones);
+        ControladorArchivosObjetos.leer("BebidaEnvasada.dat",bebidasEnvasadas);
+    }
+
+    public void actualizarMenu(){
+        ControladorArchivosObjetos.grabar("Comida.dat",comidas);
+        ControladorArchivosObjetos.grabar("Infusion.dat",infusiones);
+        ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidasEnvasadas);
+    }
+
+    public String mostrarMenu(){
+        String menu = "";
+        menu += comidas.listar() + "\n";
+        menu += infusiones.listar() + "\n";
+        menu += bebidasEnvasadas.listar();
+        return menu;
+    }
+
 }

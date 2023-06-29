@@ -73,7 +73,7 @@ public class Infusion extends Bebida { //y otros
                 super.toString() +
                 "temperatura='" + temperatura + '\'' +
                 ", tipoDeLeche=" + tipoDeLeche +
-                '}';
+                '}' + "\n";
     }
 
     //JSON -----------------------------------------------------------------------------------------------------

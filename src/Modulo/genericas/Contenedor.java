@@ -1,7 +1,12 @@
 package Modulo.genericas;
 
+import Modulo.archivos.ControladorArchivosObjetos;
+import Modulo.productos.Producto;
+import Modulo.productos.bebidas.Infusion;
+
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Contenedor<T> {
 
@@ -26,5 +31,9 @@ public class Contenedor<T> {
             lista = lista.concat(it.next().toString());
         }
         return lista;
+    }
+
+    public Iterator<T> iterar(){
+        return productos.iterator();
     }
 }
