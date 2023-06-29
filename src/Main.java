@@ -22,7 +22,7 @@ import Modulo.InterfazGrafica.CrearUsuario;
 import Modulo.InterfazGrafica.Login;
 
 public class Main {
-    public static void main(String[] args) throws ContraseñaIncorrectaException {
+    public static void main(String[] args) {
 
         //PRUEBAS ARCHIVOS PRODUCTOS
         //Cafeteria cafe = new Cafeteria();
@@ -44,22 +44,6 @@ public class Main {
         //System.out.println(usuarios.listar());
 
 
-
-        //Date d = new Date();  // Crea el objeto Date
-        //Calendar calendar = Calendar.getInstance(); // Obtiene una instancia de Calendar
-        //calendar.setTime(d); // Asigna la fecha al Calendar
-
-
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        //String fecha = sdf.format(new Date());
-        //System.out.println(fecha);
-
-        try{
-            throw new ContraseñaIncorrectaException("Contraseña incorrecta","pepe123");
-        }
-        catch (ContraseñaIncorrectaException e){
-            System.out.println(e.getMessage());
-        }
 
     }
 }
