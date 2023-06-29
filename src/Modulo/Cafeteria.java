@@ -21,13 +21,16 @@ import java.util.Map;
 
 public class Cafeteria {
 
+    //ATRIBUTOS-----------------------------------------------------------------------------------------------------
+
     private ContenedorMapa<String, Usuario> usuarios;
     private ContenedorMapa<Integer, Compra> compras;
     private int cantidadCompras; //para el numero de ticket
-
     private Contenedor<Producto> comidas;
     private Contenedor<Producto> infusiones;
     private Contenedor<Producto> bebidasEnvasadas;
+
+    //CONSTRUCTOR---------------------------------------------------------------------------------------------------
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
@@ -38,6 +41,8 @@ public class Cafeteria {
         this.bebidasEnvasadas = new Contenedor<>();
     }
 
+    //GETTERS Y SETTER---------------------------------------------------------------------------------------------
+
     public int getCantidadCompras() {
         return cantidadCompras;
     }
@@ -45,7 +50,6 @@ public class Cafeteria {
     public void setCantidadCompras(int cantidadCompras) {
         this.cantidadCompras = cantidadCompras;
     }
-
 
     //USUARIOS------------------------------------------------------------------------------------------------------
 
@@ -60,6 +64,7 @@ public class Cafeteria {
         }
        return agregado; /// sacar retornos?
     }
+
     public boolean crearAdmin(){
         Usuario admin = new Usuario("admin","1234","");
         admin.setAdministrador(true);
@@ -78,10 +83,10 @@ public class Cafeteria {
                     ingreso=2;///Ingreso cliente
                 }
             }else{
-                throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
+                throw new ContraseñaIncorrectaException("Contraseña Incorrecta", usuario);
             }
         }else{
-            throw new UsuarioNoExisteException("Usuario Incorrecto");
+            throw new UsuarioNoExisteException("Usuario Incorrecto", usuario);
         }
         return ingreso;
     }
@@ -104,7 +109,7 @@ public class Cafeteria {
     public String eliminarUsuario(String usuario) throws UsuarioNoExisteException {
         String eliminado="";
         if(!usuarios.quitar(usuario)){
-            throw new UsuarioNoExisteException("Usuario no Existe");
+            throw new UsuarioNoExisteException("Usuario no Existe", usuario);
         }else{
             eliminado= "Eliminado con éxito";
         }
@@ -147,6 +152,7 @@ public class Cafeteria {
         compras.agregar(compra.getNumeroTicket(), compra);
         cantidadCompras++;
     }
+
     public String mostrarCompras(){
         return compras.listar();
     }

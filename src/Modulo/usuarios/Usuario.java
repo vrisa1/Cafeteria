@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Usuario implements Serializable {
+
+    //ATRIBUTOS----------------------------------------------------------------------------------------------------
     private String nombreDeUsuario;
     private String contraseña;
     private  String mail;
     private boolean administrador;
 
+    //CONSTRUCTORES-----------------------------------------------------------------------------------------------
 
     public Usuario(String nombreDeUsuario, String contraseña, String mail) {
         this.nombreDeUsuario = nombreDeUsuario;
@@ -23,6 +26,8 @@ public class Usuario implements Serializable {
         this.administrador = false;
         this.mail = "";
     }
+
+    //GETTERS Y SETTERS---------------------------------------------------------------------------------------------
 
     public String getNombreDeUsuario() {
         return nombreDeUsuario;
@@ -51,6 +56,8 @@ public class Usuario implements Serializable {
     public void setContraseña(String contrasenia) {
         this.contraseña = contrasenia;
     }
+
+    //EQUALS Y TOSTRING--------------------------------------------------------------------------------------------
 
     @Override
     public String toString() {
