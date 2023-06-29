@@ -36,6 +36,7 @@ public class CrearUsuario extends JFrame{
             }else{
                 try {
                     cafeteria.CrearUsuario(nombreUsuario.getText(),new String(passwordField1.getPassword()), mail.getText());
+                    dispose();
                 }catch (UsuarioYaExisteException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }

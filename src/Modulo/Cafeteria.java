@@ -12,6 +12,8 @@ import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
 import Modulo.productos.Producto;
+import Modulo.productos.bebidas.Bebida;
+import Modulo.productos.comidas.Comida;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -170,12 +172,24 @@ public class Cafeteria {
         ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidasEnvasadas);
     }
 
-    public String mostrarMenu(){
-        String menu = "";
-        menu += comidas.listar() + "\n";
-        menu += infusiones.listar() + "\n";
-        menu += bebidasEnvasadas.listar();
-        return menu;
+    public Iterator<Producto> iterarComida(){
+        return  comidas.iterar();
     }
 
+    public int cantBebidas(){
+        return comidas.contar();
+    }
+
+    /*
+    public String[] menuComida(){
+        String[] menu = null;
+        Iterator<Producto> it = comidas.iterar();
+        int i = 0;
+        while (it.hasNext()){
+            menu[i] = it.next().
+        }
+
+        return menu;
+    }
+    */
 }
