@@ -59,7 +59,7 @@ public class Usuario implements Serializable {
                 ", contraseña='" + contraseña + '\'' +
                 ", mail='" + mail + '\'' +
                 ", administrador=" + administrador +
-                '}';
+                '}' + "\n";
     }
 
     @Override
