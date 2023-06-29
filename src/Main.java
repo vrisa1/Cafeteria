@@ -1,4 +1,5 @@
 
+
 import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.Bebida;
@@ -12,6 +13,11 @@ import Modulo.Cafeteria;
 import Modulo.usuarios.Usuario;
 import Modulo.genericas.ContenedorMapa;
 
+import Modulo.Cafeteria;
+import Modulo.InterfazGrafica.CrearUsuario;
+import Modulo.InterfazGrafica.Login;
+
+
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -20,6 +26,8 @@ public class Main {
 
 
        /* Cafeteria cafeteria = new Cafeteria();
+
+        cafeteria.crearAdmin();
 
 
 
@@ -64,11 +72,19 @@ public class Main {
         bebidas.add(b11);
         bebidas.add(b12);
 
+        //CrearUsuario crearUsuario = new CrearUsuario(cafeteria);
+
+
         ControladorArchivosObjetos.grabar(bebidas,"BebidaEnvasada.dat");
 
          */
 
+
         /*
+
+        Login login = new Login(cafeteria);
+        //InterfazAdmin interfazAdmin= new InterfazAdmin();
+
 
         //CARGAR ARCHIVO DE COMIDAS
 
