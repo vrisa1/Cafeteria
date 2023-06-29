@@ -35,7 +35,6 @@ public class Comida extends Producto {
         this.paraCompartir = paraCompartir;
     }
 
-
     //EQUALS Y TOSTRING------------------------------------------------------------------------------------------
 
     @Override
@@ -61,7 +60,6 @@ public class Comida extends Producto {
                 "paraCompartir=" + paraCompartir +
                 '}' + "\n";
     }
-
 
     //JSON -----------------------------------------------------------------------------------------------------
     @Override

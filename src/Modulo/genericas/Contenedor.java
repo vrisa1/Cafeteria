@@ -10,11 +10,17 @@ import java.util.Map;
 
 public class Contenedor<T> {
 
+    //ATRIBUTOS--------------------------------------------------------------------------------------------------
+
     HashSet<T> productos;
+
+    //CONSTRUCTOR------------------------------------------------------------------------------------------------
 
     public Contenedor() {
         this.productos = new HashSet<>();
     }
+
+    //METODOS COLECCION------------------------------------------------------------------------------------------
 
     public boolean agregarProducto (T nuevo){
         return productos.add(nuevo);
