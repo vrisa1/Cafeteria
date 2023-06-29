@@ -1,67 +1,93 @@
 package Modulo.InterfazGrafica;
 
 import Modulo.Cafeteria;
-import Modulo.usuarios.Usuario;
+import Modulo.productos.Producto;
+import Modulo.productos.comidas.Comida;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 public class InterfazAdmin extends JFrame{
     private JPanel panel1;
+    private JTabbedPane tabbedPane1;
     private JSpinner spinner1;
     private JButton agregarAlCarritoButton;
     private JTable table1;
-    private JButton verCarritoButton;
-    private JList list1;
+    private JScrollPane Comidas;
+    private JTabbedPane tabbedPane2;
+    private JTable table2;
+    private JTable table3;
 
-    private DefaultListModel<String> model;
+    private DefaultTableModel model;
 
     private DefaultTableModel defaultTableModel;
     public InterfazAdmin(Cafeteria cafeteria) {
 
-        final ArrayList<Usuario>[] aa = new ArrayList[]{new ArrayList<>()};
-            aa[0].add(new Usuario("aa","1234","mail"));
-            aa[0].add(new Usuario("bb","1234","mail"));
-            aa[0].add(new Usuario("cc","1234","mail"));
+        //setLocationRelativeTo(null);
+        setContentPane(panel1);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        pack();
+        setVisible(true);
 
-            //String[] productos = {"café1","café2","café3","café4","café5"};
-        /*
-            model = new DefaultListModel<>();
-            model.addElement("café1");
-            model.addElement("café2");
-            model.addElement("café3");
-            model.addElement("café4");
-            model.addAll(aa);
-            //list1.setModel(model);
-*/
-            String[] col ={"Productos","Precio"};
+           model = new DefaultTableModel();
 
-            String[][] data = new String[aa[0].size()][col.length];
-            int i = 0;
-            for (Usuario users : aa[0]) {
-            String[] userdata = new String[col.length];
-            userdata[0] = users.getNombreDeUsuario();
-            userdata[1] = users.getContraseña();
+            String[] col ={"Nombre","Descripcion","Precio","Compartir","Disponible"};
 
-            data[i++] = userdata;
-        }
+            Iterator<Producto> itComida = cafeteria.iterarComida();
+            String[][] listaComidas = new String[cafeteria.cantBebidas()][col.length];
+            int i =0;
+            while (itComida.hasNext()){
+                String[] comidas = new String[col.length];
+                Comida aux = (Comida) itComida.next();
+                comidas[0] = aux.getNombre();
+                comidas[1] = aux.getDescripcion();
+                comidas[2] = new String("$"+ String.valueOf(aux.getPrecio()));
+                comidas[3] = String.valueOf(aux.isParaCompartir());
+                comidas[4] = String.valueOf(aux.isDisponible());
+                listaComidas[i++] = comidas;
+            }
 
-            defaultTableModel = new DefaultTableModel();
-            defaultTableModel.setDataVector(data,col);
+            model.setDataVector(listaComidas,col);
+
+
+            table1.setModel(model);
+
+        TableColumnModel columnModel = table1.getColumnModel();
+        TableColumn col0 = columnModel.getColumn(0);
+        TableColumn col1 = columnModel.getColumn(1);
+        TableColumn col2 = columnModel.getColumn(2);
+        TableColumn col3 = columnModel.getColumn(3);
+        TableColumn col4 = columnModel.getColumn(4);
+
+
+        col0.setMinWidth(150);
+        col0.setMaxWidth(150);
+        col1.setMinWidth(500);
+        col1.setMaxWidth(500);
+        col2.setMaxWidth(80);
+        col2.setMinWidth(80);
+        col3.setMaxWidth(80);
+        col3.setMinWidth(80);
+        col4.setMaxWidth(80);
+        col4.setMinWidth(80);
+
+
+
+
+            //defaultTableModel = new DefaultTableModel();
+            //defaultTableModel.setDataVector(data,col);
 
             //defaultTableModel.setColumnIdentifiers(col);
-            /*
+        /*
             JSpinner spinner = new JSpinner();
             spinner.setValue(0);
             TableColumnModel model = table1.getColumnModel();
             TableColumn seleccion = model.getColumn(0);
-            seleccion.setCellEditor((TableCellEditor) (Default)spinner.getEditor());
-            */
+            //seleccion.setCellEditor((TableCellEditor) (Default)spinner.getEditor());
+
             table1.setModel(defaultTableModel);
             //defaultTableModel.addRow(aa.toArray());
             spinner1.setVisible(false);
@@ -99,7 +125,7 @@ public class InterfazAdmin extends JFrame{
 
             }
         });
-        */
+
 
         agregarAlCarritoButton.addActionListener(new ActionListener() {
             @Override
@@ -121,13 +147,11 @@ public class InterfazAdmin extends JFrame{
 
 
 
+          */
 
 
-            setLocationRelativeTo(null);
-            setContentPane(panel1);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            pack();
-            setVisible(true);
+
+
 
 
 

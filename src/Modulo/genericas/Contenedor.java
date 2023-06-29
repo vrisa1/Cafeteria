@@ -33,6 +33,9 @@ public class Contenedor<T> {
         return lista;
     }
 
+    public int contar(){
+        return productos.size();
+    }
     public Iterator<T> iterar(){
         return productos.iterator();
     }
