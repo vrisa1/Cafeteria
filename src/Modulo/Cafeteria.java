@@ -61,6 +61,11 @@ public class Cafeteria {
         }
        return agregado; /// sacar retornos?
     }
+    public boolean crearAdmin(){
+        Usuario admin = new Usuario("admin","1234","");
+        admin.setAdministrador(true);
+        return usuarios.agregar(admin.getNombreDeUsuario(),admin);
+    }
 
     public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
         Usuario encontrado = usuarios.buscar(usuario);

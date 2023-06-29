@@ -1,5 +1,6 @@
 package Modulo.InterfazGrafica;
 
+import Modulo.Cafeteria;
 import Modulo.usuarios.Usuario;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class InterfazAdmin extends JFrame{
     private DefaultListModel<String> model;
 
     private DefaultTableModel defaultTableModel;
-    public InterfazAdmin() {
+    public InterfazAdmin(Cafeteria cafeteria) {
 
         final ArrayList<Usuario>[] aa = new ArrayList[]{new ArrayList<>()};
             aa[0].add(new Usuario("aa","1234","mail"));
