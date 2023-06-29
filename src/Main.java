@@ -1,5 +1,6 @@
 
 
+import Modulo.Excepciones.ContraseñaIncorrectaException;
 import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.Bebida;
@@ -13,15 +14,15 @@ import Modulo.Cafeteria;
 import Modulo.usuarios.Usuario;
 import Modulo.genericas.ContenedorMapa;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import Modulo.Cafeteria;
 import Modulo.InterfazGrafica.CrearUsuario;
 import Modulo.InterfazGrafica.Login;
-import java.util.HashSet;
-import java.util.Iterator;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ContraseñaIncorrectaException {
 
         //PRUEBAS ARCHIVOS PRODUCTOS
         //Cafeteria cafe = new Cafeteria();
@@ -38,11 +39,27 @@ public class Main {
         usuarios.agregar(u3.getNombreDeUsuario(),u3);
         ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);*/
 
-        ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
-        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
-        System.out.println(usuarios.listar());
+        //ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
+        //ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+        //System.out.println(usuarios.listar());
 
 
+
+        //Date d = new Date();  // Crea el objeto Date
+        //Calendar calendar = Calendar.getInstance(); // Obtiene una instancia de Calendar
+        //calendar.setTime(d); // Asigna la fecha al Calendar
+
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        //String fecha = sdf.format(new Date());
+        //System.out.println(fecha);
+
+        try{
+            throw new ContraseñaIncorrectaException("Contraseña incorrecta","pepe123");
+        }
+        catch (ContraseñaIncorrectaException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }
