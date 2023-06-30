@@ -4,6 +4,11 @@ import Modulo.json.I_Json;
 
 import java.io.Serializable;
 
+/**
+ * Clase abstracta. Es "padre" de las clases Comida y Bebida.
+ * Implementa la interfaz I_Json para leer y escribir los productos comprados.
+ * Implementa Serializable para leer y escribir los archivos del menú.
+ */
 public abstract class Producto implements Serializable, I_Json {
 
     //ATRIBUTOS--------------------------------------------------------------------------------------------------
@@ -19,7 +24,6 @@ public abstract class Producto implements Serializable, I_Json {
         this.nombre = "";
         this.precio = 0;
         this.disponible = false;
-        //this.cantidadVendidos = 0;
         this.descripcion = "";
         this.cantidadEnCarrito = 0;
     }
@@ -28,7 +32,6 @@ public abstract class Producto implements Serializable, I_Json {
         this.nombre = nombre;
         this.precio = precio;
         this.disponible = disponible;
-        //this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
         this.cantidadEnCarrito = 0;
     }
@@ -59,16 +62,6 @@ public abstract class Producto implements Serializable, I_Json {
         this.disponible = disponible;
     }
 
-    /*
-    public int getCantidadVendidos() {
-        return cantidadVendidos;
-    }
-
-    public void setCantidadVendidos(int cantidadVendidos) {
-        this.cantidadVendidos = cantidadVendidos;
-    }
-     */
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -98,21 +91,13 @@ public abstract class Producto implements Serializable, I_Json {
     }
 
 
-    /*
-
     //OTROS METODOS------------------------------------------------------------------------------------------------
 
-
-    //para poder aumentar/disminuir cuando se venden
-    public void aumentarCantidadVendidos(int cantidad) {
-        this.cantidadVendidos += cantidad;
-    }
-
-    public void disminuirCantidadVendidos(int cantidad) {
-        this.cantidadVendidos -= cantidad;
-    }
+    /**
+     *Permite deshacer el agregado de elementos al carrito, indicando la cantidad que se quiere restar sobre el
+     * total del producto indicado.
+     * @param cantidad - Número de productos que se disminuirán del total de productos del carrito.
      */
-
     public void disminuirCantidadEnCarrito(int cantidad) {
         this.cantidadEnCarrito -= cantidad;
 
