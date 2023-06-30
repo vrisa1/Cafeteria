@@ -10,7 +10,6 @@ public abstract class Producto implements Serializable, I_Json {
     private String nombre;
     private double precio;
     private boolean disponible;
-    private int cantidadVendidos;
     private String descripcion;
     private transient int cantidadEnCarrito; //para saber cuantos productos se estan comprando
 
@@ -20,18 +19,18 @@ public abstract class Producto implements Serializable, I_Json {
         this.nombre = "";
         this.precio = 0;
         this.disponible = false;
-        this.cantidadVendidos = 0;
+        //this.cantidadVendidos = 0;
         this.descripcion = "";
         this.cantidadEnCarrito = 0;
     }
 
-    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito) {
+    public Producto(String nombre, double precio, boolean disponible, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
         this.disponible = disponible;
-        this.cantidadVendidos = cantidadVendidos;
+        //this.cantidadVendidos = cantidadVendidos;
         this.descripcion = descripcion;
-        this.cantidadEnCarrito = cantidadEnCarrito;
+        this.cantidadEnCarrito = 0;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------------------------------------------
@@ -60,6 +59,7 @@ public abstract class Producto implements Serializable, I_Json {
         this.disponible = disponible;
     }
 
+    /*
     public int getCantidadVendidos() {
         return cantidadVendidos;
     }
@@ -67,6 +67,7 @@ public abstract class Producto implements Serializable, I_Json {
     public void setCantidadVendidos(int cantidadVendidos) {
         this.cantidadVendidos = cantidadVendidos;
     }
+     */
 
     public String getDescripcion() {
         return descripcion;
@@ -92,11 +93,11 @@ public abstract class Producto implements Serializable, I_Json {
                 "nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", disponible=" + disponible +
-                ", cantidadVendidos=" + cantidadVendidos +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
 
+    /*
     //para poder aumentar/disminuir cuando se venden
     public void aumentarCantidadVendidos(int cantidad) {
         this.cantidadVendidos += cantidad;
@@ -107,6 +108,7 @@ public abstract class Producto implements Serializable, I_Json {
     public void disminuirCantidadVendidos(int cantidad) {
         this.cantidadVendidos -= cantidad;
     }
+     */
 
     public void disminuirCantidadEnCarrito(int cantidad) {
         this.cantidadEnCarrito -= cantidad;

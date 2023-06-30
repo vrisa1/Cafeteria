@@ -24,8 +24,8 @@ public class Infusion extends Bebida { //y otros
         this.tipoDeLeche = null;
     }
 
-    public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, String temperatura, Leche tipoDeLeche) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
+    public Infusion(String nombre, double precio, boolean disponible, String descripcion, double tamaño, String temperatura, Leche tipoDeLeche) {
+        super(nombre, precio, disponible, descripcion, tamaño);
         this.temperatura = temperatura;
         this.tipoDeLeche = tipoDeLeche;
     }
@@ -83,7 +83,7 @@ public class Infusion extends Bebida { //y otros
         jsonInfusion.put("nombre", getNombre());
         jsonInfusion.put("precio", getPrecio());
         jsonInfusion.put("disponible", isDisponible());
-        jsonInfusion.put("cantidadVendidos", getCantidadVendidos());
+        //jsonInfusion.put("cantidadVendidos", getCantidadVendidos());
         jsonInfusion.put("descripcion", getDescripcion());
         jsonInfusion.put("cantidadEnCarrito", getCantidadEnCarrito());
         jsonInfusion.put("tamaño", getTamaño());
@@ -97,7 +97,7 @@ public class Infusion extends Bebida { //y otros
         setNombre(jsonObject.getString("nombre"));
         setPrecio(jsonObject.getDouble("precio"));
         setDisponible(jsonObject.getBoolean("disponible"));
-        setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
+        //setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
         setDescripcion(jsonObject.getString("descripcion"));
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setTamaño(jsonObject.getDouble("tamaño"));

@@ -23,8 +23,8 @@ public class BebidaEnvasada extends Bebida {
         this.linea = "";
     }
 
-    public BebidaEnvasada(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, boolean gas, String linea) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
+    public BebidaEnvasada(String nombre, double precio, boolean disponible, String descripcion, double tamaño, boolean gas, String linea) {
+        super(nombre, precio, disponible, descripcion, tamaño);
         this.gas = gas;
         this.linea = linea;
     }
@@ -83,7 +83,7 @@ public class BebidaEnvasada extends Bebida {
         jsonBebida.put("nombre", getNombre());
         jsonBebida.put("precio", getPrecio());
         jsonBebida.put("disponible", isDisponible());
-        jsonBebida.put("cantidadVendidos", getCantidadVendidos());
+        //jsonBebida.put("cantidadVendidos", getCantidadVendidos());
         jsonBebida.put("descripcion", getDescripcion());
         jsonBebida.put("cantidadEnCarrito", getCantidadEnCarrito());
         jsonBebida.put("tamaño", getTamaño()); //claves con ñ?????
@@ -97,7 +97,7 @@ public class BebidaEnvasada extends Bebida {
         setNombre(jsonObject.getString("nombre"));
         setPrecio(jsonObject.getDouble("precio"));
         setDisponible(jsonObject.getBoolean("disponible"));
-        setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
+        //setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
         setDescripcion(jsonObject.getString("descripcion"));
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setTamaño(jsonObject.getDouble("tamaño"));

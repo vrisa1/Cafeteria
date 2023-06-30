@@ -33,22 +33,23 @@ public class Main {
         }*/
 
 
-        /*
+
+
 
         //CARGAR ARCHIVO DE BEBIDAS ENVASADAS
 
-        BebidaEnvasada b1 = new BebidaEnvasada("Patagonia Amber Lager",940,true,0,"Cerveza roja",0,730,true,"Patagonia");
-        BebidaEnvasada b2 = new BebidaEnvasada("Sprite",630,true,0,"Gaseosa pequeña, sabor lima-limon",0,500,true,"Coca-cola");
-        BebidaEnvasada b3 = new BebidaEnvasada("Levite de pomelo",630,true,0,"Agua saborizada sabor pomelo",0,500,false,"Levite");
-        BebidaEnvasada b4 = new BebidaEnvasada("Agua",600,true,0,"Agua sin gas",0,500,false,"Villavicencio");
-        BebidaEnvasada b5 = new BebidaEnvasada("Levite de manzana",630,true,0,"Agua saborizada sabor manzana",0,500,false,"Levite");
-        BebidaEnvasada b6 = new BebidaEnvasada("Patagonia Porter",940,true,0,"Cerveza negra",0,730,true,"Patagonia");
-        BebidaEnvasada b7 = new BebidaEnvasada("Corona",820,true,0,"Cerveza rubia",0,710,true,"Corona");
-        BebidaEnvasada b8 = new BebidaEnvasada("Paso de los toros",630,true,0,"Gaseosa pequeña, sabor pomelo",0,500,true,"Pepsi");
-        BebidaEnvasada b9 = new BebidaEnvasada("Agua gasificada",600,true,0,"Agua con gas",0,500,true,"Villavicencio");
-        BebidaEnvasada b10 = new BebidaEnvasada("Fanta",630,true,0,"Gaseosa pequeña, sabor naranja",0,500,true,"Coca-cola");
-        BebidaEnvasada b11 = new BebidaEnvasada("Levite de naranja",630,true,0,"Agua saborizada sabor naranja",0,500,false,"Levite");
-        BebidaEnvasada b12 = new BebidaEnvasada("Coca-cola",630,true,0,"Gaseosa pequeña, clasica",0,500,true,"Coca-cola");
+        BebidaEnvasada b1 = new BebidaEnvasada("Patagonia Amber Lager",940,true,"Cerveza roja",730,true,"Patagonia");
+        BebidaEnvasada b2 = new BebidaEnvasada("Sprite",630,true,"Gaseosa pequeña, sabor lima-limon",500,true,"Coca-cola");
+        BebidaEnvasada b3 = new BebidaEnvasada("Levite de pomelo",630,true,"Agua saborizada sabor pomelo",500,false,"Levite");
+        BebidaEnvasada b4 = new BebidaEnvasada("Agua",600,true,"Agua sin gas",500,false,"Villavicencio");
+        BebidaEnvasada b5 = new BebidaEnvasada("Levite de manzana",630,true,"Agua saborizada sabor manzana",500,false,"Levite");
+        BebidaEnvasada b6 = new BebidaEnvasada("Patagonia Porter",940,true,"Cerveza negra",730,true,"Patagonia");
+        BebidaEnvasada b7 = new BebidaEnvasada("Corona",820,true,"Cerveza rubia",710,true,"Corona");
+        BebidaEnvasada b8 = new BebidaEnvasada("Paso de los toros",630,true,"Gaseosa pequeña, sabor pomelo",500,true,"Pepsi");
+        BebidaEnvasada b9 = new BebidaEnvasada("Agua gasificada",600,true,"Agua con gas",500,true,"Villavicencio");
+        BebidaEnvasada b10 = new BebidaEnvasada("Fanta",630,true,"Gaseosa pequeña, sabor naranja",500,true,"Coca-cola");
+        BebidaEnvasada b11 = new BebidaEnvasada("Levite de naranja",630,true,"Agua saborizada sabor naranja",500,false,"Levite");
+        BebidaEnvasada b12 = new BebidaEnvasada("Coca-cola",630,true,"Gaseosa pequeña, clasica",500,true,"Coca-cola");
 
         HashSet<Producto> bebidas = new HashSet<>();
         bebidas.add(b1);
@@ -66,7 +67,7 @@ public class Main {
 
         ControladorArchivosObjetos.grabar(bebidas,"BebidaEnvasada.dat");
 
-         */
+
 
         /*
 
@@ -160,9 +161,10 @@ public class Main {
 
          */
 
+       
 
-        Class<?> classType = Infusion.class;
-        mostrarMenu("Infusion.dat",classType);
+        Class<?> classType = BebidaEnvasada.class;
+        mostrarMenu("BebidaEnvasada.dat",classType);
 
     }
     public static <T> void mostrarMenu(String nombreArchivo, Class<T> classType){
