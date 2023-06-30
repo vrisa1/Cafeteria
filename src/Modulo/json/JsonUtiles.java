@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * @author Gonzalo Benoffi :)
+ */
+
 public class JsonUtiles {
     public static void grabar(JSONArray array, String archivo) {
         try {
