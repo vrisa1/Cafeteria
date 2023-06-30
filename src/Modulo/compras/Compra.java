@@ -75,14 +75,14 @@ public class Compra implements I_Json {
             throw new ProductoNoDisponibleException("El producto no esta disponible");
         } else {
             carrito.add(producto);
-            producto.aumentarCantidadVendidos(producto.getCantidadEnCarrito());
+            //producto.aumentarCantidadVendidos(producto.getCantidadEnCarrito());
             precioTotal+= (producto.getPrecio() * (producto.getCantidadEnCarrito()));
         }
     }
 
     public void eliminarDelCarrito(Producto producto){
         carrito.remove(producto);
-        producto.disminuirCantidadVendidos(producto.getCantidadEnCarrito());
+        //producto.disminuirCantidadVendidos(producto.getCantidadEnCarrito());
         precioTotal-= (producto.getPrecio() * producto.getCantidadEnCarrito());
         producto.setCantidadEnCarrito(0);
     }
@@ -90,7 +90,7 @@ public class Compra implements I_Json {
     public void modificarCantidad(Producto producto, int cantidad){
         if (producto.getCantidadEnCarrito()>cantidad){
             producto.disminuirCantidadEnCarrito(cantidad);
-            producto.disminuirCantidadVendidos(cantidad);
+            //producto.disminuirCantidadVendidos(cantidad);
             precioTotal-= (producto.getPrecio() * cantidad);
         } else {
             //si la cantidad que quiere sacar es mayor a la existente
