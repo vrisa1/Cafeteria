@@ -68,6 +68,11 @@ public class Infusion extends Bebida { //y otros
     }
 
     @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
     public String toString() {
         return "Infusion{" +
                 super.toString() +
@@ -82,9 +87,6 @@ public class Infusion extends Bebida { //y otros
         JSONObject jsonInfusion = new JSONObject();
         jsonInfusion.put("nombre", getNombre());
         jsonInfusion.put("precio", getPrecio());
-        jsonInfusion.put("disponible", isDisponible());
-        //jsonInfusion.put("cantidadVendidos", getCantidadVendidos());
-        jsonInfusion.put("descripcion", getDescripcion());
         jsonInfusion.put("cantidadEnCarrito", getCantidadEnCarrito());
         jsonInfusion.put("tamaño", getTamaño());
         jsonInfusion.put("temperatura", getTemperatura());
@@ -96,9 +98,6 @@ public class Infusion extends Bebida { //y otros
     public void fromJSON(JSONObject jsonObject) throws JSONException {
         setNombre(jsonObject.getString("nombre"));
         setPrecio(jsonObject.getDouble("precio"));
-        setDisponible(jsonObject.getBoolean("disponible"));
-        //setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
-        setDescripcion(jsonObject.getString("descripcion"));
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setTamaño(jsonObject.getDouble("tamaño"));
         setTemperatura(jsonObject.getString("temperatura"));

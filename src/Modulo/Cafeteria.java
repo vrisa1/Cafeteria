@@ -54,6 +54,38 @@ public class Cafeteria {
         this.cantidadCompras = cantidadCompras;
     }
 
+    //Iniciar y cerrar programa
+    public String iniciar(){
+        String exception = "Carga correcta de compras";
+
+        cargarMenu(); //lee los archivos de productos
+        crearAdmin();
+        cargarUsuarios(); //lee el archivo de usuarios
+
+        try{
+            iniciarCompras(); //lee el json de compras
+        }
+        catch (JSONException e){
+            exception= e.getMessage();
+        }
+        return exception;
+    }
+
+    public String cerrar(){
+        String exception="Compras guardadas";
+
+        actualizarMenu(); //guarda los productos en archivos
+        actualizarUsuarios(); //guarda los usuarios en el archivo
+
+        try{
+            guardarJsonCompras(); //guarda las compras en json
+        }
+        catch (JSONException e){
+            exception= e.getMessage();
+        }
+        return exception;
+    }
+
     //USUARIOS------------------------------------------------------------------------------------------------------
 
     public boolean CrearUsuario(String nombre,String cont,String mail) throws UsuarioYaExisteException {
@@ -68,7 +100,7 @@ public class Cafeteria {
        return agregado; /// sacar retornos?
     }
 
-    public boolean crearAdmin(){
+    private boolean crearAdmin(){
         Usuario admin = new Usuario("admin","1234","");
         admin.setAdministrador(true);
         return usuarios.agregar(admin.getNombreDeUsuario(),admin);
@@ -147,7 +179,7 @@ public class Cafeteria {
             compras.agregar(aux.getNumeroTicket(), aux);
         }
 
-        cantidadCompras = compras.contar() + 1; //
+        cantidadCompras = compras.contar() + 1;
     }
 
     public void finalizarCompra(Compra compra, MetodosDePago metodoDePago){
@@ -163,6 +195,7 @@ public class Cafeteria {
     public Iterator<Map.Entry<Integer,Compra>> iterarCompras(){
         return  compras.iterar();
     }
+
     public void guardarJsonCompras() throws JSONException {
 
         //guardo el contenedor en json
@@ -174,7 +207,7 @@ public class Cafeteria {
         JsonUtiles.grabar(jsonArray, "compras");
     }
 
-    //PRODUCTOS--------------------------------------------------------------------------------------------------------
+//PRODUCTOS--------------------------------------------------------------------------------------------------------
 
     public void cargarMenu(){
         ControladorArchivosObjetos.leer("Comida.dat",comidas);
@@ -207,6 +240,7 @@ public class Cafeteria {
             infusiones.quitarProducto((Infusion) producto);
         }
     }
+
     public Iterator<Producto> iterarComida(){
         return  comidas.iterar();
     }

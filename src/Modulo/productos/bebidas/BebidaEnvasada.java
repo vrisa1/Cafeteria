@@ -86,11 +86,8 @@ public class BebidaEnvasada extends Bebida {
         JSONObject jsonBebida = new JSONObject();
         jsonBebida.put("nombre", getNombre());
         jsonBebida.put("precio", getPrecio());
-        jsonBebida.put("disponible", isDisponible());
-        //jsonBebida.put("cantidadVendidos", getCantidadVendidos());
-        jsonBebida.put("descripcion", getDescripcion());
         jsonBebida.put("cantidadEnCarrito", getCantidadEnCarrito());
-        jsonBebida.put("tamaño", getTamaño()); //claves con ñ?????
+        jsonBebida.put("tamaño", getTamaño());
         jsonBebida.put("gas", isGas());
         jsonBebida.put("linea", getLinea());
         return jsonBebida;
@@ -100,9 +97,6 @@ public class BebidaEnvasada extends Bebida {
     public void fromJSON(JSONObject jsonObject) throws JSONException {
         setNombre(jsonObject.getString("nombre"));
         setPrecio(jsonObject.getDouble("precio"));
-        setDisponible(jsonObject.getBoolean("disponible"));
-        //setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
-        setDescripcion(jsonObject.getString("descripcion"));
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
         setTamaño(jsonObject.getDouble("tamaño"));
         setGas(jsonObject.getBoolean("gas"));

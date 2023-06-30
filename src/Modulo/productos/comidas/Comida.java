@@ -10,7 +10,6 @@ public class Comida extends Producto {
 
     //ATRIBUTOS---------------------------------------------------------------------------------------------------
 
-    //private Date horarios;
     private boolean paraCompartir;
 
     //CONSTRUCTORES---------------------------------------------------------------------------------------------
@@ -54,6 +53,11 @@ public class Comida extends Producto {
     }
 
     @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
     public String toString() {
         return "Comida{" +
                 super.toString() +
@@ -67,11 +71,7 @@ public class Comida extends Producto {
         JSONObject jsonComida = new JSONObject();
         jsonComida.put("nombre", getNombre());
         jsonComida.put("precio", getPrecio());
-        jsonComida.put("disponible", isDisponible());
-        //jsonComida.put("cantidadVendidos", getCantidadVendidos());
-        jsonComida.put("descripcion", getDescripcion());
         jsonComida.put("cantidadEnCarrito", getCantidadEnCarrito());
-        jsonComida.put("paraCompartir", isParaCompartir());
         return jsonComida;
     }
 
@@ -79,10 +79,6 @@ public class Comida extends Producto {
     public void fromJSON(JSONObject jsonObject) throws JSONException {
         setNombre(jsonObject.getString("nombre"));
         setPrecio(jsonObject.getDouble("precio"));
-        setDisponible(jsonObject.getBoolean("disponible"));
-        //setCantidadVendidos(jsonObject.getInt("cantidadVendidos"));
-        setDescripcion(jsonObject.getString("descripcion"));
         setCantidadEnCarrito(jsonObject.getInt("cantidadEnCarrito"));
-        setParaCompartir(jsonObject.getBoolean("paraCompartir"));
     }
 }

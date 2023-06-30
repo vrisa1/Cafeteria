@@ -39,10 +39,25 @@ public class Contenedor<T> {
         return lista;
     }
 
+    public T buscar(T dato){
+        T encontrado=null;
+        Iterator<T> it = productos.iterator();
+        while (it.hasNext()){
+            T aux = it.next();
+            if(aux.equals(dato)){
+                encontrado = aux;
+            }
+        }
+        return encontrado;
+    }
+
     public int contar(){
         return productos.size();
     }
+
     public Iterator<T> iterar(){
         return productos.iterator();
     }
+
+
 }
