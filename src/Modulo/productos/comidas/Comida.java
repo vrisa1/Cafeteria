@@ -6,6 +6,11 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+/**
+ * Subclase, hereda de Producto.
+ * No es abstracta, puede instanciarse.
+ * Implementa los métodos de la interfaz I_Json.
+ */
 public class Comida extends Producto {
 
     //ATRIBUTOS---------------------------------------------------------------------------------------------------
