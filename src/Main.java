@@ -1,3 +1,6 @@
+import Modulo.Excepciones.ContraseñaIncorrectaException;
+import Modulo.InterfazGrafica.InterfazAdmin;
+
 import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.Cafeteria;
 import Modulo.Excepciones.ProductoNoDisponibleException;
@@ -23,19 +26,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import Modulo.Cafeteria;
 import Modulo.InterfazGrafica.CrearUsuario;
 import Modulo.InterfazGrafica.Login;
-import java.util.HashSet;
-import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
 
         //PRUEBAS ARCHIVOS PRODUCTOS
-        //Cafeteria cafe = new Cafeteria();
-        //cafe.cargarMenu();
+        Cafeteria cafe = new Cafeteria();
+        cafe.cargarMenu();
         //System.out.println("\n" + cafe.mostrarMenu());
 
         
@@ -49,9 +52,9 @@ public class Main {
         usuarios.agregar(u3.getNombreDeUsuario(),u3);
         ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);*/
 
-        ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
-        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
-        System.out.println(usuarios.listar());
+        //ContenedorMapa<String,Usuario> usuarios = new ContenedorMapa<>();
+        //ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+        //System.out.println(usuarios.listar());
 
 
         /*
@@ -93,6 +96,10 @@ public class Main {
 
         //InterfazAdmin aux=new InterfazAdmin();
         //Login aux1= new Login(new Cafeteria());
+
+
+        cafe.crearAdmin();
+        InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
 
 
     }

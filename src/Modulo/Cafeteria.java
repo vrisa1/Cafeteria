@@ -6,14 +6,11 @@ import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.compras.Compra;
 import Modulo.compras.MetodosDePago;
 import Modulo.Excepciones.UsuarioYaExisteException;
-import Modulo.InterfazGrafica.InterfazAdmin;
 import Modulo.genericas.Contenedor;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
 import Modulo.productos.Producto;
-import Modulo.productos.bebidas.Bebida;
-import Modulo.productos.comidas.Comida;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,13 +21,16 @@ import java.util.Map;
 
 public class Cafeteria {
 
+    //ATRIBUTOS-----------------------------------------------------------------------------------------------------
+
     private ContenedorMapa<String, Usuario> usuarios;
     private ContenedorMapa<Integer, Compra> compras;
     private int cantidadCompras; //para el numero de ticket
-
     private Contenedor<Producto> comidas;
     private Contenedor<Producto> infusiones;
     private Contenedor<Producto> bebidasEnvasadas;
+
+    //CONSTRUCTOR---------------------------------------------------------------------------------------------------
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
@@ -41,6 +41,8 @@ public class Cafeteria {
         this.bebidasEnvasadas = new Contenedor<>();
     }
 
+    //GETTERS Y SETTER---------------------------------------------------------------------------------------------
+
     public int getCantidadCompras() {
         return cantidadCompras;
     }
@@ -48,7 +50,6 @@ public class Cafeteria {
     public void setCantidadCompras(int cantidadCompras) {
         this.cantidadCompras = cantidadCompras;
     }
-
 
     //USUARIOS------------------------------------------------------------------------------------------------------
 
@@ -63,6 +64,7 @@ public class Cafeteria {
         }
        return agregado; /// sacar retornos?
     }
+
     public boolean crearAdmin(){
         Usuario admin = new Usuario("admin","1234","");
         admin.setAdministrador(true);
@@ -81,10 +83,10 @@ public class Cafeteria {
                     ingreso=2;///Ingreso cliente
                 }
             }else{
-                throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
+                throw new ContraseñaIncorrectaException("Contraseña Incorrecta", usuario);
             }
         }else{
-            throw new UsuarioNoExisteException("Usuario Incorrecto");
+            throw new UsuarioNoExisteException("Usuario Incorrecto", usuario);
         }
         return ingreso;
     }
@@ -107,13 +109,20 @@ public class Cafeteria {
     public String eliminarUsuario(String usuario) throws UsuarioNoExisteException {
         String eliminado="";
         if(!usuarios.quitar(usuario)){
-            throw new UsuarioNoExisteException("Usuario no Existe");
+            throw new UsuarioNoExisteException("Usuario no Existe", usuario);
         }else{
             eliminado= "Eliminado con éxito";
         }
         return eliminado;
     }
 
+    public Iterator<Map.Entry<String, Usuario>> iterarUsuarios(){
+        return usuarios.iterar();
+    }
+
+    public int cantUsuarios(){
+        return usuarios.contar();
+    }
     public void cargarUsuarios(){
         ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
     }
@@ -143,6 +152,7 @@ public class Cafeteria {
         compras.agregar(compra.getNumeroTicket(), compra);
         cantidadCompras++;
     }
+
     public String mostrarCompras(){
         return compras.listar();
     }
@@ -176,10 +186,22 @@ public class Cafeteria {
         return  comidas.iterar();
     }
 
-    public int cantBebidas(){
+    public Iterator<Producto> iterarInfusiones(){
+        return infusiones.iterar();
+    }
+    public Iterator<Producto> iterarEnvasadas(){
+        return bebidasEnvasadas.iterar();
+    }
+    public int cantComidas(){
         return comidas.contar();
     }
 
+    public int cantInfusiones(){
+        return infusiones.contar();
+    }
+    public int cantEnvasadas(){
+        return bebidasEnvasadas.contar();
+    }
     /*
     public String[] menuComida(){
         String[] menu = null;

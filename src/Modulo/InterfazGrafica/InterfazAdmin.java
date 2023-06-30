@@ -2,13 +2,16 @@ package Modulo.InterfazGrafica;
 
 import Modulo.Cafeteria;
 import Modulo.productos.Producto;
+import Modulo.productos.bebidas.BebidaEnvasada;
+import Modulo.productos.bebidas.Infusion;
 import Modulo.productos.comidas.Comida;
+import Modulo.usuarios.Usuario;
+
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import java.util.Iterator;
+import java.util.Map;
 
 public class InterfazAdmin extends JFrame{
     private JPanel panel1;
@@ -20,8 +23,13 @@ public class InterfazAdmin extends JFrame{
     private JTabbedPane tabbedPane2;
     private JTable table2;
     private JTable table3;
+    private JTable tablaUsuarios;
 
-    private DefaultTableModel model;
+    private DefaultTableModel modelUsuarios;
+    private DefaultTableModel modelComidas;
+
+    private DefaultTableModel modelInfusiones;
+    private DefaultTableModel modelEnvasadas;
 
     private DefaultTableModel defaultTableModel;
     public InterfazAdmin(Cafeteria cafeteria) {
@@ -32,15 +40,43 @@ public class InterfazAdmin extends JFrame{
         pack();
         setVisible(true);
 
-           model = new DefaultTableModel();
+        modelUsuarios = new DefaultTableModel();
 
-            String[] col ={"Nombre","Descripcion","Precio","Compartir","Disponible"};
+        String[] colUsuarios ={"Nombre de Usuario","Mail","Administrador"};
+
+        Iterator<Map.Entry<String, Modulo.usuarios.Usuario>> itUsuarios = cafeteria.iterarUsuarios();
+        String[][] listaUsuarios = new String[cafeteria.cantUsuarios()][colUsuarios.length];
+        int u =0;
+        while (itUsuarios.hasNext()){
+            String[] usuarios = new String[colUsuarios.length];
+            Usuario aux = (Usuario) itUsuarios.next().getValue();
+            usuarios[0] = aux.getNombreDeUsuario();
+            usuarios[1] = aux.getMail();
+            usuarios[2] = String.valueOf(aux.isAdministrador());
+            listaUsuarios[u++] = usuarios;
+        }
+
+        modelUsuarios.setDataVector(listaUsuarios,colUsuarios);
+
+
+        tablaUsuarios.setModel(modelUsuarios);
+
+
+
+
+
+
+
+
+           modelComidas = new DefaultTableModel();
+
+            String[] colComidas ={"Nombre","Descripcion","Precio","Compartir","Disponible"};
 
             Iterator<Producto> itComida = cafeteria.iterarComida();
-            String[][] listaComidas = new String[cafeteria.cantBebidas()][col.length];
+            String[][] listaComidas = new String[cafeteria.cantComidas()][colComidas.length];
             int i =0;
             while (itComida.hasNext()){
-                String[] comidas = new String[col.length];
+                String[] comidas = new String[colComidas.length];
                 Comida aux = (Comida) itComida.next();
                 comidas[0] = aux.getNombre();
                 comidas[1] = aux.getDescripcion();
@@ -50,10 +86,10 @@ public class InterfazAdmin extends JFrame{
                 listaComidas[i++] = comidas;
             }
 
-            model.setDataVector(listaComidas,col);
+            modelComidas.setDataVector(listaComidas,colComidas);
 
 
-            table1.setModel(model);
+            table1.setModel(modelComidas);
 
         TableColumnModel columnModel = table1.getColumnModel();
         TableColumn col0 = columnModel.getColumn(0);
@@ -74,7 +110,49 @@ public class InterfazAdmin extends JFrame{
         col4.setMaxWidth(80);
         col4.setMinWidth(80);
 
+        modelInfusiones = new DefaultTableModel();
+        String[] colInfusiones ={"Nombre","Descripcion","Precio","Temperatura","Disponible"};
 
+        Iterator<Producto> itInfusiones = cafeteria.iterarInfusiones();
+        String[][] listaInfusiones = new String[cafeteria.cantInfusiones()][colInfusiones.length];
+        int j =0;
+        while (itInfusiones.hasNext()){
+            String[] infusiones = new String[colInfusiones.length];
+            Infusion aux = (Infusion) itInfusiones.next();
+            infusiones[0] = aux.getNombre();
+            infusiones[1] = aux.getDescripcion();
+            infusiones[2] = "$" + String.valueOf(aux.getPrecio());
+            infusiones[3] = aux.getTemperatura();
+            infusiones[4] = String.valueOf(aux.isDisponible());
+            listaInfusiones[j++] = infusiones;
+        }
+
+        modelInfusiones.setDataVector(listaInfusiones,colInfusiones);
+        table2.setModel(modelInfusiones);
+
+
+        modelEnvasadas = new DefaultTableModel();
+
+        String[] colEnvasadas ={"Nombre","Descripcion","Precio","Linea","Gasificada","Tamaño","Disponible"};
+
+        Iterator<Producto> itEnvasadas = cafeteria.iterarEnvasadas();
+        String[][] listaEnvasadas = new String[cafeteria.cantEnvasadas()][colEnvasadas.length];
+        int k =0;
+        while (itEnvasadas.hasNext()){
+            String[] envasadas = new String[colEnvasadas.length];
+            BebidaEnvasada aux = (BebidaEnvasada) itEnvasadas.next();
+            envasadas[0] = aux.getNombre();
+            envasadas[1] = aux.getDescripcion();
+            envasadas[2] = new String("$"+ String.valueOf(aux.getPrecio()));
+            envasadas[3] = aux.getLinea();
+            envasadas[4] = String.valueOf(aux.isGas());
+            envasadas[5] = String.valueOf(aux.getTamaño()) + "cc";
+            envasadas[6] = String.valueOf(aux.isDisponible());
+            listaEnvasadas[k++] = envasadas;
+        }
+
+        modelEnvasadas.setDataVector(listaEnvasadas,colEnvasadas);
+        table3.setModel(modelEnvasadas);
 
 
             //defaultTableModel = new DefaultTableModel();
