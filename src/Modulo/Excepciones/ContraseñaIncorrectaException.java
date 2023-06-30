@@ -14,7 +14,7 @@ public class ContraseñaIncorrectaException extends Exception{
 
     /**
      * Constructor de la excepción. Guarda el usuario y la fecha del login fallido.
-     * @param msg - Mensaje de error mostrado al usuario.
+     * @param msg - Mensaje de error enviado al lanzarse la excepción.
      * @param usuario - Usuario de la cuenta a la que se intentó ingresar.
      */
     public ContraseñaIncorrectaException(String msg, String usuario){
