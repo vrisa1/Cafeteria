@@ -432,6 +432,25 @@ public class InterfazAdmin extends JFrame{
                 }
 
         });
+        modificarPrecioEnvasadas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table3.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table3.getValueAt(table3.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarEnvasadas();
+                    while (itCom.hasNext()){
+                        BebidaEnvasada aux = (BebidaEnvasada) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            double precio = parseDouble(JOptionPane.showInputDialog("Ingrese nuevo Precio"));
+                            aux.setPrecio(precio);
+                            JOptionPane.showMessageDialog(null,nombre + " Ahora cuesta: "+precio);
+                        }
+                    }
+                }
+            }
+
+        });
+
     }
 
 
