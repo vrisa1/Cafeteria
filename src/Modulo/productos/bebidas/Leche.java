@@ -1,7 +1,7 @@
 package Modulo.productos.bebidas;
 
 public enum Leche {
-    ALMENDRA, COCO, DESLACTOSADA, ENTERA;
+    ALMENDRA, COCO, DESLACTOSADA, ENTERA, NINGUNA;
 
 }
 
