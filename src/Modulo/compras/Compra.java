@@ -13,7 +13,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Contiene una coleccion de productos y ofrece funcionalidad para comprar.
+ * Implementa la interfaz I_Json para leer y escribir las compras realizadas.
+ */
 public class Compra implements I_Json {
+
+    //ATRIBUTOS--------------------------------------------------------------------------------------------------
     private int numeroTicket;
     private String fechaHora;
     private MetodosDePago metodoDePago;
@@ -21,6 +27,7 @@ public class Compra implements I_Json {
     private double precioTotal;
     private boolean entregado;
 
+    //CONSTRUCTORES----------------------------------------------------------------------------------------------
     public Compra() {
         this.numeroTicket = 0;
         this.fechaHora = "";
@@ -39,6 +46,7 @@ public class Compra implements I_Json {
         this.entregado=false;
     }
 
+    //GETTERS Y SETTERS------------------------------------------------------------------------------------------
     public int getNumeroTicket() {
         return numeroTicket;
     }
@@ -83,8 +91,15 @@ public class Compra implements I_Json {
     }
 
 
-    //METODOS AGREGAR, ELIMINAR, MODIFICAR
+    //METODOS AGREGAR, ELIMINAR, MODIFICAR -------------------------------------------------------------------------
 
+    /**
+     * Permite agregar un producto al carrito (Lista de productos), suma el precio del producto agregado a un
+     *  acumulador.
+     * @param producto - Producto a agregar.
+     * @throws ProductoNoDisponibleException - Lanza esta excepcion cuando el producto que se quiere agregar no
+     *  esta disponible.
+     */
     public void agregarAlCarrito(Producto producto) throws ProductoNoDisponibleException {
         if(!producto.isDisponible()){
             throw new ProductoNoDisponibleException("El producto no esta disponible");
@@ -94,12 +109,23 @@ public class Compra implements I_Json {
         }
     }
 
+    /**
+     * Permite eliminar un producto del carrito (Lista de productos), resta el precio del producto eliminado del
+     *  acumulador.
+     * @param producto - Producto a eliminar.
+     */
     public void eliminarDelCarrito(Producto producto){
         carrito.remove(producto);
         precioTotal-= (producto.getPrecio() * producto.getCantidadEnCarrito());
         producto.setCantidadEnCarrito(0);
     }
 
+    /**
+     * Permite modificar la cantidad de un producto que ya se encuentra en el carrito (Lista de productos), resta
+     *  el precio de las cantidades eliminadas del producto.
+     * @param producto - Producto al que se le quiere modificar la cantidad.
+     * @param cantidad - La cantidad de unidades a disminuir del producto.
+     */
     public void modificarCantidad(Producto producto, int cantidad){
         if (producto.getCantidadEnCarrito()>cantidad){
             producto.disminuirCantidadEnCarrito(cantidad);
@@ -109,7 +135,7 @@ public class Compra implements I_Json {
         }
     }
 
-    //toString
+    //TOSTRING----------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Compra{" +
