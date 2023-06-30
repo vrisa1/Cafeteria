@@ -57,33 +57,7 @@ public class Login extends JFrame{
         );
 
 
-        /*
-       passwordField1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                changed();
-            }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                changed();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                changed();
-            }
-
-            public void changed () {
-                if(passwordField1.getPassword().length==0){
-                    ingresarButton.setEnabled(false);
-                }else{
-                    ingresarButton.setEnabled(true);
-                }
-
-            }
-        });
-        */
         nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override

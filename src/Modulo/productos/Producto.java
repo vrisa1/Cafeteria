@@ -97,13 +97,16 @@ public abstract class Producto implements Serializable, I_Json {
                 '}';
     }
 
+
     /*
+
+    //OTROS METODOS------------------------------------------------------------------------------------------------
+
+
     //para poder aumentar/disminuir cuando se venden
     public void aumentarCantidadVendidos(int cantidad) {
         this.cantidadVendidos += cantidad;
-
     }
-
 
     public void disminuirCantidadVendidos(int cantidad) {
         this.cantidadVendidos -= cantidad;

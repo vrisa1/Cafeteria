@@ -2,13 +2,15 @@ package Modulo;
 
 import Modulo.Excepciones.ContraseñaIncorrectaException;
 import Modulo.Excepciones.UsuarioNoExisteException;
+import Modulo.archivos.ControladorArchivosObjetos;
 import Modulo.compras.Compra;
 import Modulo.compras.MetodosDePago;
 import Modulo.Excepciones.UsuarioYaExisteException;
-import Modulo.InterfazGrafica.InterfazAdmin;
+import Modulo.genericas.Contenedor;
 import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
+import Modulo.productos.Producto;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,15 +21,27 @@ import java.util.Map;
 
 public class Cafeteria {
 
+    //ATRIBUTOS-----------------------------------------------------------------------------------------------------
+
     private ContenedorMapa<String, Usuario> usuarios;
     private ContenedorMapa<Integer, Compra> compras;
     private int cantidadCompras; //para el numero de ticket
+    private Contenedor<Producto> comidas;
+    private Contenedor<Producto> infusiones;
+    private Contenedor<Producto> bebidasEnvasadas;
+
+    //CONSTRUCTOR---------------------------------------------------------------------------------------------------
 
     public Cafeteria() {
         this.usuarios = new ContenedorMapa<>();
         this.compras= new ContenedorMapa<>();
         this.cantidadCompras=0;
+        this.comidas = new Contenedor<>();
+        this.infusiones = new Contenedor<>();
+        this.bebidasEnvasadas = new Contenedor<>();
     }
+
+    //GETTERS Y SETTER---------------------------------------------------------------------------------------------
 
     public int getCantidadCompras() {
         return cantidadCompras;
@@ -36,7 +50,6 @@ public class Cafeteria {
     public void setCantidadCompras(int cantidadCompras) {
         this.cantidadCompras = cantidadCompras;
     }
-
 
     //USUARIOS------------------------------------------------------------------------------------------------------
 
@@ -52,6 +65,12 @@ public class Cafeteria {
        return agregado; /// sacar retornos?
     }
 
+    public boolean crearAdmin(){
+        Usuario admin = new Usuario("admin","1234","");
+        admin.setAdministrador(true);
+        return usuarios.agregar(admin.getNombreDeUsuario(),admin);
+    }
+
     public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
         Usuario encontrado = usuarios.buscar(usuario);
         int ingreso=0;
@@ -64,10 +83,10 @@ public class Cafeteria {
                     ingreso=2;///Ingreso cliente
                 }
             }else{
-                throw new ContraseñaIncorrectaException("Contraseña Incorrecta");
+                throw new ContraseñaIncorrectaException("Contraseña Incorrecta", usuario);
             }
         }else{
-            throw new UsuarioNoExisteException("Usuario Incorrecto");
+            throw new UsuarioNoExisteException("Usuario Incorrecto", usuario);
         }
         return ingreso;
     }
@@ -90,13 +109,27 @@ public class Cafeteria {
     public String eliminarUsuario(String usuario) throws UsuarioNoExisteException {
         String eliminado="";
         if(!usuarios.quitar(usuario)){
-            throw new UsuarioNoExisteException("Usuario no Existe");
+            throw new UsuarioNoExisteException("Usuario no Existe", usuario);
         }else{
             eliminado= "Eliminado con éxito";
         }
         return eliminado;
     }
 
+    public Iterator<Map.Entry<String, Usuario>> iterarUsuarios(){
+        return usuarios.iterar();
+    }
+
+    public int cantUsuarios(){
+        return usuarios.contar();
+    }
+    public void cargarUsuarios(){
+        ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
+    }
+
+    public void actualizarUsuarios(){
+        ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);
+    }
 
     //COMPRAS--------------------------------------------------------------------------------------------------------
 
@@ -119,6 +152,7 @@ public class Cafeteria {
         compras.agregar(compra.getNumeroTicket(), compra);
         cantidadCompras++;
     }
+
     public String mostrarCompras(){
         return compras.listar();
     }
@@ -133,4 +167,51 @@ public class Cafeteria {
         }
         JsonUtiles.grabar(jsonArray, "compras");
     }
+
+    //PRODUCTOS--------------------------------------------------------------------------------------------------------
+
+    public void cargarMenu(){
+        ControladorArchivosObjetos.leer("Comida.dat",comidas);
+        ControladorArchivosObjetos.leer("Infusion.dat",infusiones);
+        ControladorArchivosObjetos.leer("BebidaEnvasada.dat",bebidasEnvasadas);
+    }
+
+    public void actualizarMenu(){
+        ControladorArchivosObjetos.grabar("Comida.dat",comidas);
+        ControladorArchivosObjetos.grabar("Infusion.dat",infusiones);
+        ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidasEnvasadas);
+    }
+
+    public Iterator<Producto> iterarComida(){
+        return  comidas.iterar();
+    }
+
+    public Iterator<Producto> iterarInfusiones(){
+        return infusiones.iterar();
+    }
+    public Iterator<Producto> iterarEnvasadas(){
+        return bebidasEnvasadas.iterar();
+    }
+    public int cantComidas(){
+        return comidas.contar();
+    }
+
+    public int cantInfusiones(){
+        return infusiones.contar();
+    }
+    public int cantEnvasadas(){
+        return bebidasEnvasadas.contar();
+    }
+    /*
+    public String[] menuComida(){
+        String[] menu = null;
+        Iterator<Producto> it = comidas.iterar();
+        int i = 0;
+        while (it.hasNext()){
+            menu[i] = it.next().
+        }
+
+        return menu;
+    }
+    */
 }
