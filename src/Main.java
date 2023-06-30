@@ -101,12 +101,11 @@ public class Main {
         ControladorArchivosObjetos.grabar("Comida.dat", comidas);
 
 
-
         //CARGAR ARCHIVO DE INFUSIONES
 
-        Infusion i1 = new Infusion("Cafe",530,true,"Cafe negro",60,"Caliente",Leche.NINGUNA);
+        Infusion i1 = new Infusion("Licuado de banana",880,true,"Licuado de banana con leche",360,"Frio",null);
         Infusion i2 = new Infusion("Frapuccino tramontana",1200,true,"Cafe frio con leche, crema y helado de tramontana",360,"Frio",null);
-        Infusion i3 = new Infusion("Te",580,true,"Te negro en saquito",280,"Caliente",Leche.NINGUNA);
+        Infusion i3 = new Infusion("Milkshake de frutilla",1100,true,"Batido de helado y leche",360,"Frio",null);
         Infusion i4 = new Infusion("Lagrima",580,true,"1/3 cafe, 2/3 leche",200,"Caliente",null);
         Infusion i5 = new Infusion("Moka",1090,true,"Cafe cortado con salsa de chocolate y crema",280,"Caliente",null);
         Infusion i6 = new Infusion("Frapuccino chocolate",1200,true,"Cafe frio con leche, crema, salsa de chocolate y chocolate rallado",360,"Frio",null);
@@ -115,7 +114,7 @@ public class Main {
         Infusion i9 = new Infusion("Submarino",780,true,"Leche con chocolate",280,"Caliente",null);
         Infusion i10 = new Infusion("Chai latte",880,true,"Te especiado, con leche",360,"Caliente",null);
         Infusion i11 = new Infusion("Capuccino",780,true,"Cafe con leche, chocolate y canela",200,"Caliente",null);
-        Infusion i12 = new Infusion("Limonada",800,true,"Con menta y jengibre",360,"Frio",Leche.NINGUNA);
+        Infusion i12 = new Infusion("Iced latte",580,true,"Cafe con leche y hielo",200,"Frio",null);
         Infusion i13 = new Infusion("Frapuccino dulce de leche",1200,true,"Cafe frio con leche, crema y dulce de leche",360,"Frio",null);
         Infusion i14 = new Infusion("Cafe con leche",580,true,"2/3 cafe, 1/3 leche",180,"Caliente",null);
 
@@ -138,6 +137,8 @@ public class Main {
         ControladorArchivosObjetos.grabar("Infusion.dat",infusiones);
         
          */
+        
+
 
 
     }
