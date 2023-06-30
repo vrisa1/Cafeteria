@@ -262,15 +262,14 @@ public class InterfazAdmin extends JFrame{
                     String nombre = agregarPNombre.getText();
                     double precio = parseDouble(agregarPPrecio.getText());
                     boolean disponible = disponibleCheckBox.isSelected();
-                    int cantidad = 0;
                     String descripción = agregarPDescripción.getText();
 
                     if(comboBoxTipoProducto.getSelectedItem().toString().equals("Bebida Envasada") && !agregarEnvasadaTamaño.getText().isEmpty() && !agregarEnvasadaGas.getSelectedItem().toString().isEmpty() && !agregarEnvasadaLinea.getText().isEmpty()){
-                            nueva = new BebidaEnvasada(nombre,precio,disponible,cantidad,descripción,cantidad, parseDouble(agregarEnvasadaTamaño.getText()),agregarEnvasadaGas.getSelectedItem().equals("Con Gas"),agregarEnvasadaLinea.getText());
+                            nueva = new BebidaEnvasada(nombre,precio,disponible,descripción, parseDouble(agregarEnvasadaTamaño.getText()),agregarEnvasadaGas.getSelectedItem().equals("Con Gas"),agregarEnvasadaLinea.getText());
                     }else if (comboBoxTipoProducto.getSelectedItem().toString().equals("Comida")) {
-                        nueva = new Comida(nombre,precio,disponible,cantidad,descripción,cantidad,checkBoxCompartir.isSelected());
+                        nueva = new Comida(nombre,precio,disponible,descripción,checkBoxCompartir.isSelected());
                     }else if (!agregarITamaño.getText().isEmpty() && !agregarITemp.getText().isEmpty() && !comboBoxtipoLeche.getSelectedItem().toString().isEmpty()){
-                        nueva = new Infusion(nombre,precio,disponible,cantidad,descripción,cantidad,parseDouble(agregarITamaño.getText()),agregarITemp.getText(), Leche.valueOf(comboBoxtipoLeche.getSelectedItem().toString()));
+                        nueva = new Infusion(nombre,precio,disponible,descripción,parseDouble(agregarITamaño.getText()),agregarITemp.getText(), Leche.valueOf(comboBoxtipoLeche.getSelectedItem().toString()));
                     }
 
                     if(nueva!=null){
@@ -298,12 +297,13 @@ public class InterfazAdmin extends JFrame{
             }
 
         });
-        elimnarComidaButton.addActionListener(new ActionListener() {
+        eliminarComidaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(table1.getValueAt(table1.getSelectedRow(),0)!=null){
                    int i = JOptionPane.showConfirmDialog( null,"Está seguro que desea Eliminar");
-                   if(i==1){
+                   if(i==0){
+                       JOptionPane.showMessageDialog(null,"ELiminado Éxito");
                        Comida aux = new Comida();
                        aux.setNombre(table1.getValueAt(table1.getSelectedRow(),0).toString());
                        cafeteria.eliminarProducto(aux);
@@ -316,7 +316,8 @@ public class InterfazAdmin extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(table3.getValueAt(table3.getSelectedRow(),0)!=null){
                     int i = JOptionPane.showConfirmDialog( null,"Está seguro que desea Eliminar");
-                    if(i==1){
+                    if(i==0){
+                        JOptionPane.showMessageDialog(null,"ELiminado Éxito");
                         BebidaEnvasada aux = new BebidaEnvasada();
                         aux.setNombre(table3.getValueAt(table3.getSelectedRow(),0).toString());
                         cafeteria.eliminarProducto(aux);
@@ -329,7 +330,8 @@ public class InterfazAdmin extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(table2.getValueAt(table2.getSelectedRow(),0)!=null){
                     int i = JOptionPane.showConfirmDialog( null,"Está seguro que desea Eliminar");
-                    if(i==1){
+                    if(i==0){
+                        JOptionPane.showMessageDialog(null,"ELiminado Éxito");
                         Infusion aux = new Infusion();
                         aux.setNombre(table2.getValueAt(table2.getSelectedRow(),0).toString());
                         cafeteria.eliminarProducto(aux);
