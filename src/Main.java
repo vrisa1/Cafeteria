@@ -42,7 +42,7 @@ public class Main {
 
         //PRUEBAS ARCHIVOS PRODUCTOS
         Cafeteria cafe = new Cafeteria();
-        cafe.cargarMenu();
+        //cafe.cargarMenu();
         //System.out.println("\n" + cafe.mostrarMenu());
 
         
@@ -249,10 +249,13 @@ public class Main {
         catch (JSONException e){
             System.out.println(e.getMessage());
         }
-        */
 
-        System.out.println(cafe.iniciar());
+
+         */
+
+        //System.out.println(cafe.iniciar());
         //InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
+        cafe.iniciar();
         Login login = new Login(cafe);
 
     }

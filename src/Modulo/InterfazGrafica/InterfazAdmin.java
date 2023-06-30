@@ -451,6 +451,23 @@ public class InterfazAdmin extends JFrame{
 
         });
 
+        modificarPrecioInfusiones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table2.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table2.getValueAt(table2.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarComida();
+                    while (itCom.hasNext()){
+                        Infusion aux = (Infusion) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            double precio = parseDouble(JOptionPane.showInputDialog("Ingrese nuevo Precio"));
+                            aux.setPrecio(precio);
+                            JOptionPane.showMessageDialog(null,nombre + " Ahora cuesta: "+precio);
+                        }
+                    }
+                }
+            }
+        });
     }
 
 
