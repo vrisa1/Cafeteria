@@ -5,6 +5,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Esta clase implementa un Hash Map generico.
+ * Utilizada para contenedor de compras y usuarios.
+ * @param <K> - Clave generica.
+ * @param <V> - Valor generico.
+ */
 public class ContenedorMapa<K,V> {
 
     HashMap<K,V> elementos;
