@@ -63,8 +63,7 @@ public class Infusion extends Bebida { //y otros
                 flag = true;
             } else if (obj instanceof Infusion) {
                 Infusion aux = (Infusion) obj;
-                if (getNombre().equals(aux.getNombre()) && getTamaño() == aux.getTamaño() &&
-                        getTemperatura().equals(aux.getTemperatura()) && getTipoDeLeche().equals(aux.getTipoDeLeche())) {
+                if (getNombre().equals(aux.getNombre())) {
                     flag = true;
                 }
             }

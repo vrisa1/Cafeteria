@@ -29,7 +29,7 @@ public class Login extends JFrame{
 
         setLocationRelativeTo(null);
         setContentPane(jpanel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
         setVisible(true);
 
@@ -42,11 +42,11 @@ public class Login extends JFrame{
                     try {
                         int ingreso = cafeteria.login(usuario,pas);
                         if(ingreso==1){
-                            setVisible(false);
+                            dispose();
                             InterfazAdmin interfazAdmin = new InterfazAdmin(cafeteria);
                         }else {
-                            setVisible(false);
-                            JOptionPane.showMessageDialog(null,ingreso);///acceso interfaz usuario
+                            dispose();
+                            InterfazUsuario interfazUsuario = new InterfazUsuario(cafeteria);
                         }
                     }catch (UsuarioNoExisteException | ContraseñaIncorrectaException ex){
                         JOptionPane.showMessageDialog(null,ex.getMessage());
@@ -94,6 +94,7 @@ public class Login extends JFrame{
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cafeteria.cerrar();
                 dispose();
             }
         });

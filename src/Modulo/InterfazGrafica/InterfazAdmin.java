@@ -1,6 +1,7 @@
 package Modulo.InterfazGrafica;
 
 import Modulo.Cafeteria;
+import Modulo.compras.Compra;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.BebidaEnvasada;
 import Modulo.productos.bebidas.Infusion;
@@ -20,12 +21,7 @@ import static java.lang.Double.parseDouble;
 
 public class InterfazAdmin extends JFrame{
     private JPanel panel1;
-    private JTabbedPane tabbedPane1;
-    private JSpinner spinner1;
-    private JButton agregarAlCarritoButton;
     private JTable table1;
-    private JScrollPane Comidas;
-    private JTabbedPane tabbedPane2;
     private JTable table2;
     private JTable table3;
     private JTable tablaUsuarios;
@@ -38,7 +34,6 @@ public class InterfazAdmin extends JFrame{
     private JTextField agregarEnvasadaLinea;
     private JComboBox<String> agregarEnvasadaGas;
     private JTextField agregarEnvasadaTamaño;
-    private JPanel panelAProducto;
     private JPanel panelABebida;
     private JCheckBox checkBoxCompartir;
     private JPanel panelAComida;
@@ -50,16 +45,21 @@ public class InterfazAdmin extends JFrame{
     private JButton eliminarEnvasadasButton;
     private JButton eliminarInfusionesButton;
     private JTable tablaCompras;
-    private JButton elimnarComidaButton;
+    private JButton salirDelProgramaButton;
+    private JTabbedPane tabbedPane2;
+    private JTabbedPane tabbedPane1;
+    private JPanel panelAProducto;
+    private JButton modificarPrecioComidaButton;
+    private JButton modificarDisponibilidadComidaButton;
+    private JButton modificarDispinibilidadEnvasadas;
+    private JButton modificarPrecioEnvasadas;
+    private JButton modificarDisponibilidadInfusiones;
+    private JButton modificarPrecioInfusiones;
 
-    private DefaultTableModel modelCompras;
-
-    private DefaultTableModel defaultTableModel;
     public InterfazAdmin(Cafeteria cafeteria) {
 
-        //setLocationRelativeTo(null);
         setContentPane(panel1);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
         setVisible(true);
 
@@ -173,31 +173,29 @@ public class InterfazAdmin extends JFrame{
         table3.setDefaultEditor(Object.class, null);
         table3.setModel(modelEnvasadas);
 
-        /*
+
         DefaultTableModel modelCompra = new DefaultTableModel();
 
-        String[] colCompras ={"Nombre","Descripcion","Precio","Linea","Gasificada","Tamaño","Disponible"};
-
-        Iterator<Producto> itEnvasadas = cafeteria.iterarEnvasadas();
-        String[][] listaEnvasadas = new String[cafeteria.cantEnvasadas()][colEnvasadas.length];
-        int k =0;
-        while (itEnvasadas.hasNext()){
-            String[] envasadas = new String[colEnvasadas.length];
-            BebidaEnvasada aux = (BebidaEnvasada) itEnvasadas.next();
-            envasadas[0] = aux.getNombre();
-            envasadas[1] = aux.getDescripcion();
-            envasadas[2] = new String("$"+ String.valueOf(aux.getPrecio()));
-            envasadas[3] = aux.getLinea();
-            envasadas[4] = String.valueOf(aux.isGas());
-            envasadas[5] = String.valueOf(aux.getTamaño()) + "cc";
-            envasadas[6] = String.valueOf(aux.isDisponible());
-            listaEnvasadas[k++] = envasadas;
+        String[] colCompra ={"Numero de ticket", "Fecha-Hora", "Metodo de pago", "Precio final"};
+        Iterator<Map.Entry<Integer,Compra>> itCompras = cafeteria.iterarCompras();
+        int iCompras=0;
+        String[][] listaCompra = new String[cafeteria.getCantidadCompras()][colCompra.length];
+        while (itCompras.hasNext()){
+            Compra compra = itCompras.next().getValue();
+            String[] atributos = new String[colCompra.length];
+            atributos[0] = String.valueOf(compra.getNumeroTicket());
+            atributos[1] = String.valueOf(compra.getFechaHora());
+            atributos[2] = String.valueOf(compra.getMetodoDePago());
+            atributos[3] = "$" + String.valueOf(compra.getPrecioTotal());
+            listaCompra[iCompras++] = atributos;
         }
 
-        modelEnvasadas.setDataVector(listaEnvasadas,colEnvasadas);
-        table3.setDefaultEditor(Object.class, null);
-        table3.setModel(modelEnvasadas);
-        */
+        modelCompra.setDataVector(listaCompra,colCompra);
+
+        tablaCompras.setModel(modelCompra);
+        tablaCompras.setDefaultEditor(Object.class, null);
+
+
 
 
         panelAComida.setVisible(false);
@@ -335,6 +333,137 @@ public class InterfazAdmin extends JFrame{
                         Infusion aux = new Infusion();
                         aux.setNombre(table2.getValueAt(table2.getSelectedRow(),0).toString());
                         cafeteria.eliminarProducto(aux);
+                    }
+                }
+            }
+        });
+        salirDelProgramaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = JOptionPane.showConfirmDialog( null,"Está seguro que desea Salir");
+                if(i==0){
+                   cafeteria.cerrar();
+                   dispose();
+                }
+            }
+        });
+
+        modificarDisponibilidadComidaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table1.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarComida();
+                    while (itCom.hasNext()){
+                        Comida aux = (Comida) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            if(aux.isDisponible()){
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora no está disponible");
+                                aux.setDisponible(false);
+                            }else{
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora está disponible");
+                                aux.setDisponible(true);
+                            }
+                        }
+                    }
+            }
+                }
+
+        });
+
+
+        modificarDispinibilidadEnvasadas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!table3.getSelectionModel().isSelectionEmpty()) {
+                    String nombre = table3.getValueAt(table3.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarEnvasadas();
+                    while (itCom.hasNext()){
+                        BebidaEnvasada aux = (BebidaEnvasada) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            if(aux.isDisponible()){
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora no está disponible");
+                                aux.setDisponible(false);
+                            }else{
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora está disponible");
+                                aux.setDisponible(true);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        modificarDisponibilidadInfusiones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ( !table2.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table2.getValueAt(table2.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarInfusiones();
+                    while (itCom.hasNext()){
+                        Infusion aux = (Infusion) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            if(aux.isDisponible()){
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora no está disponible");
+                                aux.setDisponible(false);
+                            }else{
+                                JOptionPane.showMessageDialog(null,nombre + " Ahora está disponible");
+                                aux.setDisponible(true);
+                            }
+                        }
+                    }
+                    }
+                }
+                });
+        modificarPrecioComidaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table1.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarComida();
+                    while (itCom.hasNext()){
+                        Comida aux = (Comida) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                             double precio = parseDouble(JOptionPane.showInputDialog("Ingrese nuevo Precio"));
+                             aux.setPrecio(precio);
+                             JOptionPane.showMessageDialog(null,nombre + " Ahora cuesta: "+precio);
+                            }
+                        }
+                    }
+                }
+
+        });
+        modificarPrecioEnvasadas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table3.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table3.getValueAt(table3.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarEnvasadas();
+                    while (itCom.hasNext()){
+                        BebidaEnvasada aux = (BebidaEnvasada) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            double precio = parseDouble(JOptionPane.showInputDialog("Ingrese nuevo Precio"));
+                            aux.setPrecio(precio);
+                            JOptionPane.showMessageDialog(null,nombre + " Ahora cuesta: "+precio);
+                        }
+                    }
+                }
+            }
+
+        });
+
+        modificarPrecioInfusiones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!table2.getSelectionModel().isSelectionEmpty()){
+                    String nombre = table2.getValueAt(table2.getSelectedRow(), 0).toString();
+                    Iterator<Producto> itCom = cafeteria.iterarComida();
+                    while (itCom.hasNext()){
+                        Infusion aux = (Infusion) itCom.next();
+                        if(aux.getNombre().equals(nombre) ){
+                            double precio = parseDouble(JOptionPane.showInputDialog("Ingrese nuevo Precio"));
+                            aux.setPrecio(precio);
+                            JOptionPane.showMessageDialog(null,nombre + " Ahora cuesta: "+precio);
+                        }
                     }
                 }
             }
