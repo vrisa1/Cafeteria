@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Contenedor<T extends Producto> {
+public class Contenedor<T> {
 
     //ATRIBUTOS--------------------------------------------------------------------------------------------------
 

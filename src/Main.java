@@ -111,6 +111,7 @@ public class Main {
 
 
         /*
+
         //CARGAR ARCHIVO DE COMIDAS
 
         Comida c1 = new Comida("Medialuna salada",300,true,"Medialuna salada",false);
@@ -195,9 +196,38 @@ public class Main {
         infusiones.agregarProducto(i14);
 
         ControladorArchivosObjetos.grabar("Infusion.dat",infusiones);
+
+        //envasadas
+        BebidaEnvasada b1 = new BebidaEnvasada("Patagonia Amber Lager",940,true,"Cerveza roja",730,true,"Patagonia");
+        BebidaEnvasada b2 = new BebidaEnvasada("Sprite",630,true,"Gaseosa pequeña, sabor lima-limon",500,true,"Coca-cola");
+        BebidaEnvasada b3 = new BebidaEnvasada("Levite de pomelo",630,true,"Agua saborizada sabor pomelo",500,false,"Levite");
+        BebidaEnvasada b4 = new BebidaEnvasada("Agua",600,true,"Agua sin gas",500,false,"Villavicencio");
+        BebidaEnvasada b5 = new BebidaEnvasada("Levite de manzana",630,true,"Agua saborizada sabor manzana",500,false,"Levite");
+        BebidaEnvasada b6 = new BebidaEnvasada("Patagonia Porter",940,true,"Cerveza negra",730,true,"Patagonia");
+        BebidaEnvasada b7 = new BebidaEnvasada("Corona",820,true,"Cerveza rubia",710,true,"Corona");
+        BebidaEnvasada b8 = new BebidaEnvasada("Paso de los toros",630,true,"Gaseosa pequeña, sabor pomelo",500,true,"Pepsi");
+        BebidaEnvasada b9 = new BebidaEnvasada("Agua gasificada",600,true,"Agua con gas",500,true,"Villavicencio");
+        BebidaEnvasada b10 = new BebidaEnvasada("Fanta",630,true,"Gaseosa pequeña, sabor naranja",500,true,"Coca-cola");
+        BebidaEnvasada b11 = new BebidaEnvasada("Levite de naranja",630,true,"Agua saborizada sabor naranja",500,false,"Levite");
+        BebidaEnvasada b12 = new BebidaEnvasada("Coca-cola",630,true,"Gaseosa pequeña, clasica",500,true,"Coca-cola");
+
+        Contenedor<Producto> bebidas = new Contenedor<>();
+        bebidas.agregarProducto(b1);
+        bebidas.agregarProducto(b2);
+        bebidas.agregarProducto(b3);
+        bebidas.agregarProducto(b4);
+        bebidas.agregarProducto(b5);
+        bebidas.agregarProducto(b6);
+        bebidas.agregarProducto(b7);
+        bebidas.agregarProducto(b8);
+        bebidas.agregarProducto(b9);
+        bebidas.agregarProducto(b10);
+        bebidas.agregarProducto(b11);
+        bebidas.agregarProducto(b12);
+
+        ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidas);
         
          */
-        
 
 
 
