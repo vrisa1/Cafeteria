@@ -22,6 +22,14 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Clase envoltorio.
+ * Se encarga de dar funcionamiento al programa, acoplando las colecciones, leyendo y escribiendo
+ * archivos y json, da comienzo y fin a la ejecución.
+ * Contiene un mapa de usuarios y otro de compras, set de productos segun la clasificacion de los
+ * mismos, y el numero de ticket para dar seguimiento
+ * a las ventas realizadas.
+ */
 public class Cafeteria {
 
     //ATRIBUTOS-----------------------------------------------------------------------------------------------------
@@ -88,6 +96,14 @@ public class Cafeteria {
 
     //USUARIOS------------------------------------------------------------------------------------------------------
 
+    /**
+     * Crea un nuevo usuario y asigna nombre, email y contraseña correspondiente.
+     * @param nombre - Identificador del usuario.
+     * @param cont - Contraseña de la cuenta.
+     * @param mail - Email asociado a la cuenta.
+     * @return agregado - Boolean que indica si el usuario fue creado correctamente.
+     * @throws UsuarioYaExisteException - Si el identificador de usuario ya pertenece a otra cuenta.
+     */
     public boolean CrearUsuario(String nombre,String cont,String mail) throws UsuarioYaExisteException {
         boolean agregado = false;
         if(usuarios.buscar(nombre)==null){
@@ -97,15 +113,30 @@ public class Cafeteria {
         }else {
             throw new UsuarioYaExisteException("Usuario ya Existe");
         }
-       return agregado; /// sacar retornos?
+       return agregado;
     }
 
+    /**
+     * Crea un usuario de tipo administrador.
+     * @return boolean - Indica si el usuario administrador fue creado correctamente.
+     */
     private boolean crearAdmin(){
         Usuario admin = new Usuario("admin","1234","");
         admin.setAdministrador(true);
         return usuarios.agregar(admin.getNombreDeUsuario(),admin);
     }
 
+    /**
+     * Permite iniciar sesión en el sistema.
+     * @param usuario - Nombre del usuario que inicia sesión.
+     * @param cont - Contraseña del usuario que inicia sesión.
+     * @return ingreso - int que indica el tipo de usuario que inició sesión: 1 si es administrador
+     * o 2 si es cliente.
+     * @throws UsuarioNoExisteException - Excepción lanzada si el identificador de usuario ingresado
+     * no existe o no es válido.
+     * @throws ContraseñaIncorrectaException - Excepción lanzada si la contraseña de usuario ingresada
+     * no existe o no es válida.
+     */
     public int login(String usuario,String cont) throws UsuarioNoExisteException, ContraseñaIncorrectaException {
         Usuario encontrado = usuarios.buscar(usuario);
         int ingreso=0;
@@ -126,6 +157,13 @@ public class Cafeteria {
         return ingreso;
     }
 
+    /**
+     * Permite modificar los datos de un usuario.
+     * @param usuario - Nombre del usuario que se desea modificar.
+     * @param mail - Email del usuario que se desea modificar.
+     * @param cont - Contraseña del usuario que se desea modificar.
+     * @return modif - boolean que indica si el usuario fue modificado correctamente.
+     */
     public boolean modificarUsuario(String usuario,String mail,String cont){
         boolean modif= false;
         if(usuarios.buscar(usuario)!=null){
@@ -137,10 +175,21 @@ public class Cafeteria {
         return modif;
     }
 
+    /**
+     * Lista datos de usuarios (ContenedorMapa).
+     * @return String - datos del ContenedorMapa de usuarios listados en forma de String.
+     */
     public String mostrar(){
         return usuarios.listar();
     }
 
+    /**
+     * Permite eliminar un usuario buscándolo por identificador.
+     * @param usuario - Nombre de usuario que se quiere eliminar.
+     * @return eliminado - boolean que indica si el usuario fue correctamente eliminado.
+     * @throws UsuarioNoExisteException - Excepción que se lanza si el usuario que se quiere
+     * eliminar no existe.
+     */
     public boolean eliminarUsuario(String usuario) throws UsuarioNoExisteException {
         boolean eliminado=false;
         if(!usuarios.quitar(usuario)){
@@ -151,23 +200,43 @@ public class Cafeteria {
         return eliminado;
     }
 
+    /**
+     *
+     * @return iterator de mapa de usuarios.
+     */
     public Iterator<Map.Entry<String, Usuario>> iterarUsuarios(){
         return usuarios.iterar();
     }
 
+    /**
+     * Cuenta la cantidad de usuarios.
+     * @return cantidad de usuarios en el mapa.
+     */
     public int cantUsuarios(){
         return usuarios.contar();
     }
+
+    /**
+     * Lee el archivo de usuarios y escribe los datos en el mapa.
+     */
     public void cargarUsuarios(){
         ControladorArchivosObjetos.leer("usuarios.dat",usuarios);
     }
 
+    /**
+     * Escribe usuarios almacenados en el mapa en un archivo.
+     */
     public void actualizarUsuarios(){
         ControladorArchivosObjetos.grabar("usuarios.dat",usuarios);
     }
 
     //COMPRAS--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Lee el json de compras y las agrega en el mapa de compras.
+     * Cuenta la cantidad de compras para actualizar el atributo cantidadCompras.
+     * @throws JSONException - Excepción lanzada al producirse un error de lectura de json.
+     */
     public void iniciarCompras() throws JSONException {
 
         //leo el json y lo guardo en el contenedor
@@ -182,20 +251,37 @@ public class Cafeteria {
         cantidadCompras = compras.contar() + 1;
     }
 
+    /**
+     * Finaliza una compra y la guarda en el contenedor.
+     * @param compra - Compra a finalizar.
+     * @param metodoDePago - Método de pago elegido.
+     */
     public void finalizarCompra(Compra compra, MetodosDePago metodoDePago){
         compra.setMetodoDePago(metodoDePago);
         compras.agregar(compra.getNumeroTicket(), compra);
         cantidadCompras++;
     }
 
+    /**
+     * Lista las compras del contenedor.
+     * @return String - Listado de compras.
+     */
     public String mostrarCompras(){
         return compras.listar();
     }
 
+    /**
+     *
+     * @return iterator de mapa de compras.
+     */
     public Iterator<Map.Entry<Integer,Compra>> iterarCompras(){
         return  compras.iterar();
     }
 
+    /**
+     * Guarda el mapa de compras en json.
+     * @throws JSONException - Se lanza ante un error de escritura de json.
+     */
     public void guardarJsonCompras() throws JSONException {
 
         //guardo el contenedor en json
@@ -209,18 +295,28 @@ public class Cafeteria {
 
 //PRODUCTOS--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Lee los archivos de productos y los carga en los contenedores.
+     */
     public void cargarMenu(){
         ControladorArchivosObjetos.leer("Comida.dat",comidas);
         ControladorArchivosObjetos.leer("Infusion.dat",infusiones);
         ControladorArchivosObjetos.leer("BebidaEnvasada.dat",bebidasEnvasadas);
     }
 
+    /**
+     * Escribe en los archivos de productos el contenido de los contenedores.
+     */
     public void actualizarMenu(){
         ControladorArchivosObjetos.grabar("Comida.dat",comidas);
         ControladorArchivosObjetos.grabar("Infusion.dat",infusiones);
         ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidasEnvasadas);
     }
 
+    /**
+     * Agrega un producto a un contenedor según su clase.
+     * @param nuevo - Producto que se quiere agregar al contenedor.
+     */
     public void agregarProducto(Producto nuevo){ //arreglar!!
         if(nuevo instanceof Comida){
             comidas.agregarProducto(nuevo);
@@ -231,6 +327,10 @@ public class Cafeteria {
         }
     }
 
+    /**
+     * Elimina un producto de su respectivo contenedor.
+     * @param producto - Producto a eliminar.
+     */
     public void eliminarProducto(Producto producto){
         if (producto instanceof Comida){
             comidas.quitarProducto((Comida) producto);
@@ -241,27 +341,58 @@ public class Cafeteria {
         }
     }
 
+    /**
+     *
+     * @return iterator de set de comidas.
+     */
     public Iterator<Producto> iterarComida(){
         return  comidas.iterar();
     }
 
+    /**
+     *
+     * @return iterator de set de infusiones.
+     */
     public Iterator<Producto> iterarInfusiones(){
         return infusiones.iterar();
     }
+
+    /**
+     *
+     * @return iterator de set de bebidas envasadas.
+     */
     public Iterator<Producto> iterarEnvasadas(){
         return bebidasEnvasadas.iterar();
     }
+
+    /**
+     * Cuenta la cantidad de comidas en el contenedor.
+     * @return cantidad de comidas en el set.
+     */
     public int cantComidas(){
         return comidas.contar();
     }
 
+    /**
+     * Cuenta la cantidad de infusiones en el contenedor.
+     * @return cantidad de infusiones en el set.
+     */
     public int cantInfusiones(){
         return infusiones.contar();
     }
+
+    /**
+     * Cuenta la cantidad de bebidas envasadas en el contenedor.
+     * @return cantidad de bebidas envasadas en el set.
+     */
     public int cantEnvasadas(){
         return bebidasEnvasadas.contar();
     }
 
+    /**
+     * Lista todos los productos de todos los set.
+     * @return listado de productos en formato String.
+     */
     public String mostrarMenu(){
         String menu = "";
         menu += comidas.listar() + "\n";

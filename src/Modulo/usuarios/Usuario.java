@@ -3,6 +3,10 @@ package Modulo.usuarios;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Instancia usuarios.
+ * Pueden ser de tipo administrador o cliente.
+ */
 public class Usuario implements Serializable {
 
     //ATRIBUTOS----------------------------------------------------------------------------------------------------
