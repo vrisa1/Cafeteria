@@ -8,7 +8,12 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-
+/**
+ * Subclase, hereda de Bebida.
+ * No es abstracta, se puede instanciar.
+ * Implementa los métodos de la interfaz I_Json.
+ * Tiene atributos propios.
+ */
 public class Infusion extends Bebida { //y otros
 
     //ATRIBUTOS------------------------------------------------------------------------------------------------
