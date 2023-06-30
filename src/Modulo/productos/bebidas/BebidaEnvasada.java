@@ -58,13 +58,17 @@ public class BebidaEnvasada extends Bebida {
                 flag = true;
             } else if (obj instanceof BebidaEnvasada) {
                 BebidaEnvasada aux = (BebidaEnvasada) obj;
-                if (getNombre().equals(aux.getNombre()) && getTamaño() == aux.getTamaño() &&
-                        getLinea().equals(aux.getLinea()) && isGas() == aux.isGas()) {
+                if (getNombre().equals(aux.getNombre())) {
                     flag = true;
                 }
             }
         }
         return flag;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 
     @Override
