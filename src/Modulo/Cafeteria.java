@@ -11,6 +11,9 @@ import Modulo.genericas.ContenedorMapa;
 
 import Modulo.json.JsonUtiles;
 import Modulo.productos.Producto;
+import Modulo.productos.bebidas.BebidaEnvasada;
+import Modulo.productos.bebidas.Infusion;
+import Modulo.productos.comidas.Comida;
 import Modulo.usuarios.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,12 +109,12 @@ public class Cafeteria {
         return usuarios.listar();
     }
 
-    public String eliminarUsuario(String usuario) throws UsuarioNoExisteException {
-        String eliminado="";
+    public boolean eliminarUsuario(String usuario) throws UsuarioNoExisteException {
+        boolean eliminado=false;
         if(!usuarios.quitar(usuario)){
             throw new UsuarioNoExisteException("Usuario no Existe", usuario);
         }else{
-            eliminado= "Eliminado con éxito";
+            eliminado= true;
         }
         return eliminado;
     }
@@ -157,6 +160,9 @@ public class Cafeteria {
         return compras.listar();
     }
 
+    public Iterator<Map.Entry<Integer,Compra>> iterarCompras(){
+        return  compras.iterar();
+    }
     public void guardarJsonCompras() throws JSONException {
 
         //guardo el contenedor en json
@@ -182,6 +188,25 @@ public class Cafeteria {
         ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidasEnvasadas);
     }
 
+    public void agregarProducto(Producto nuevo){ //arreglar!!
+        if(nuevo instanceof Comida){
+            comidas.agregarProducto(nuevo);
+        } else if (nuevo instanceof Infusion) {
+            infusiones.agregarProducto(nuevo);
+        }else {
+            bebidasEnvasadas.agregarProducto(nuevo);
+        }
+    }
+
+    public void eliminarProducto(Producto producto){
+        if (producto instanceof Comida){
+            comidas.quitarProducto((Comida) producto);
+        } else if(producto instanceof BebidaEnvasada){
+            bebidasEnvasadas.quitarProducto((BebidaEnvasada) producto);
+        } else {
+            infusiones.quitarProducto((Infusion) producto);
+        }
+    }
     public Iterator<Producto> iterarComida(){
         return  comidas.iterar();
     }

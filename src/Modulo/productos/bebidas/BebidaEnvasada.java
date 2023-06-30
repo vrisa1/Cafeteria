@@ -24,7 +24,7 @@ public class BebidaEnvasada extends Bebida {
     }
 
     public BebidaEnvasada(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, boolean gas, String linea) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
+        super(nombre, precio, disponible, descripcion, tamaño,cantidadVendidos,cantidadEnCarrito);
         this.gas = gas;
         this.linea = linea;
     }
@@ -58,13 +58,17 @@ public class BebidaEnvasada extends Bebida {
                 flag = true;
             } else if (obj instanceof BebidaEnvasada) {
                 BebidaEnvasada aux = (BebidaEnvasada) obj;
-                if (getNombre().equals(aux.getNombre()) && getTamaño() == aux.getTamaño() &&
-                        getLinea().equals(aux.getLinea()) && isGas() == aux.isGas()) {
+                if (getNombre().equals(aux.getNombre())) {
                     flag = true;
                 }
             }
         }
         return flag;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 
     @Override

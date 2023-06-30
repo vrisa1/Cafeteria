@@ -25,7 +25,7 @@ public class Infusion extends Bebida { //y otros
     }
 
     public Infusion(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño, String temperatura, Leche tipoDeLeche) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito, tamaño);
+        super(nombre, precio, disponible, descripcion, tamaño,cantidadVendidos,cantidadEnCarrito);
         this.temperatura = temperatura;
         this.tipoDeLeche = tipoDeLeche;
     }

@@ -25,13 +25,13 @@ public abstract class Producto implements Serializable, I_Json {
         this.cantidadEnCarrito = 0;
     }
 
-    public Producto(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito) {
+    public Producto(String nombre, double precio, boolean disponible, String descripcion, int cantidadVendidos,int cantidadEnCarrito) {
         this.nombre = nombre;
         this.precio = precio;
         this.disponible = disponible;
-        this.cantidadVendidos = cantidadVendidos;
+        this.cantidadVendidos = 0;
         this.descripcion = descripcion;
-        this.cantidadEnCarrito = cantidadEnCarrito;
+        this.cantidadEnCarrito = 0;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------------------------------------------

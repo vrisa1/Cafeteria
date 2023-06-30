@@ -15,8 +15,8 @@ public abstract class Bebida extends Producto {
         this.tamaño = 0;
     }
 
-    public Bebida(String nombre, double precio, boolean disponible, int cantidadVendidos, String descripcion, int cantidadEnCarrito, double tamaño) {
-        super(nombre, precio, disponible, cantidadVendidos, descripcion, cantidadEnCarrito);
+    public Bebida(String nombre, double precio, boolean disponible, String descripcion, double tamaño,int cantidadVendidos,int cantidadEnCarrito) {
+        super(nombre, precio, disponible, descripcion,cantidadVendidos,cantidadEnCarrito);
         this.tamaño = tamaño;
     }
 
