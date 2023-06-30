@@ -3,7 +3,6 @@ package Modulo.InterfazGrafica;
 import Modulo.Cafeteria;
 import Modulo.Excepciones.ProductoNoDisponibleException;
 import Modulo.compras.Compra;
-import Modulo.compras.MetodosDePago;
 import Modulo.productos.Producto;
 import Modulo.productos.bebidas.BebidaEnvasada;
 import Modulo.productos.bebidas.Infusion;
@@ -33,15 +32,15 @@ public class InterfazUsuario extends JFrame {
     private JSpinner cantidad1;
     private JButton agregarAlCarritoButton2;
     private JSpinner cantidad2;
+    private JButton salirDelProgramaButton;
     private DefaultTableModel modelComidas;
     private DefaultTableModel modelInfusiones;
     private DefaultTableModel modelEnvasadas;
 
     public InterfazUsuario(Cafeteria cafeteria) {
 
-        //setLocationRelativeTo(null);
         setContentPane(panel1);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
         setVisible(true);
 
@@ -144,7 +143,7 @@ public class InterfazUsuario extends JFrame {
             BebidaEnvasada aux = (BebidaEnvasada) itEnvasadas.next();
             envasadas[0] = aux.getNombre();
             envasadas[1] = aux.getDescripcion();
-            envasadas[2] = new String("$"+ String.valueOf(aux.getPrecio()));
+            envasadas[2] = "$" + String.valueOf(aux.getPrecio());
             envasadas[3] = String.valueOf(aux.getTamaño()) + "cc";
             envasadas[4] = aux.getLinea();
             envasadas[5] = String.valueOf(aux.isGas());
@@ -229,7 +228,7 @@ public class InterfazUsuario extends JFrame {
         agregarAlCarritoButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!infusiones.getSelectionModel().isSelectionEmpty() && infusiones.getValueAt(infusiones.getSelectedRow(), 6).toString().equals("true") && !tipoDeLeche.getSelectedItem().toString().isEmpty()){
+                if(!infusiones.getSelectionModel().isSelectionEmpty() && infusiones.getValueAt(infusiones.getSelectedRow(), 5).toString().equals("true") && !tipoDeLeche.getSelectedItem().toString().isEmpty()){
                     String nombre = infusiones.getValueAt(infusiones.getSelectedRow(), 0).toString();
                     int cant = (int) cantidad1.getValue();
                     Iterator<Producto> itInf = cafeteria.iterarInfusiones();
@@ -305,6 +304,16 @@ public class InterfazUsuario extends JFrame {
             }
         });
 
+        salirDelProgramaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = JOptionPane.showConfirmDialog( null,"Está seguro que desea Salir");
+                if(i==0){
+                    cafeteria.cerrar();
+                    dispose();
+                }
+            }
+        });
     }
 
 }

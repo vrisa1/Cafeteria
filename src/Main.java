@@ -43,7 +43,7 @@ public class Main {
         //PRUEBAS ARCHIVOS PRODUCTOS
         Cafeteria cafe = new Cafeteria();
         cafe.cargarMenu();
-        System.out.println("\n" + cafe.mostrarMenu());
+        //System.out.println("\n" + cafe.mostrarMenu());
 
         
         //PRUEBAS ARCHIVOS USUARIOS
@@ -103,15 +103,15 @@ public class Main {
         //Login aux1= new Login(new Cafeteria());
 
 
-        cafe.crearAdmin();
-        InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
+        //cafe.crearAdmin();
+        //InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
 
         //cafe.crearAdmin();
         //InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
 
 
-        /*
 
+        /*
         //CARGAR ARCHIVO DE COMIDAS
 
         Comida c1 = new Comida("Medialuna salada",300,true,"Medialuna salada",false);
@@ -227,11 +227,33 @@ public class Main {
 
         ControladorArchivosObjetos.grabar("BebidaEnvasada.dat",bebidas);
         
-         */
+
+        Compra compra=new Compra(cafe.getCantidadCompras());
+        b12.setCantidadEnCarrito(1);
+        b10.setCantidadEnCarrito(2);
+        try {
+            compra.agregarAlCarrito(b12);
+            compra.agregarAlCarrito(b10);
+        }
+        catch (ProductoNoDisponibleException e){
+            System.out.println(e.getMessage());
+        }
+
+        //hacer elegir al usuario el metodo para finalizar la compra
+        cafe.finalizarCompra(compra, MetodosDePago.CREDITO);
 
 
+        try{
+            cafe.guardarJsonCompras();
+        }
+        catch (JSONException e){
+            System.out.println(e.getMessage());
+        }
+        */
 
-
+        System.out.println(cafe.iniciar());
+        //InterfazAdmin interfazAdmin = new InterfazAdmin(cafe);
+        Login login = new Login(cafe);
 
     }
 }

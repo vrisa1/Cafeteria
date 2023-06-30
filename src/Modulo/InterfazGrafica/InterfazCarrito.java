@@ -35,7 +35,7 @@ public class InterfazCarrito extends JFrame {
 
         //setLocationRelativeTo(null);
         setContentPane(panel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
         setVisible(true);
 
@@ -126,6 +126,7 @@ public class InterfazCarrito extends JFrame {
                             compra.modificarCantidad(carrito.get(i), cant);
                             JOptionPane.showMessageDialog(null, "La cantidad de "+nombre +" fue modificada correctamente");
                         }
+                        i++;
                     }
 
                 }
@@ -151,12 +152,15 @@ public class InterfazCarrito extends JFrame {
                     if(comboBoxPago.getSelectedItem().toString().equals(MetodosDePago.EFECTIVO.name())){
                         cafeteria.finalizarCompra(compra, MetodosDePago.EFECTIVO);
                         JOptionPane.showMessageDialog(null, "Compra finalizada");
+                        dispose();
                     } else if (comboBoxPago.getSelectedItem().toString().equals(MetodosDePago.DEBITO.name())) {
                         cafeteria.finalizarCompra(compra, MetodosDePago.DEBITO);
                         JOptionPane.showMessageDialog(null, "Compra finalizada");
+                        dispose();
                     }else {
                         cafeteria.finalizarCompra(compra, MetodosDePago.CREDITO);
                         JOptionPane.showMessageDialog(null, "Compra finalizada");
+                        dispose();
                     }
 
                 }
