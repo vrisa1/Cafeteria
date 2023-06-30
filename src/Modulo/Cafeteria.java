@@ -202,16 +202,13 @@ public class Cafeteria {
     public int cantEnvasadas(){
         return bebidasEnvasadas.contar();
     }
-    /*
-    public String[] menuComida(){
-        String[] menu = null;
-        Iterator<Producto> it = comidas.iterar();
-        int i = 0;
-        while (it.hasNext()){
-            menu[i] = it.next().
-        }
 
+    public String mostrarMenu(){
+        String menu = "";
+        menu += comidas.listar() + "\n";
+        menu += infusiones.listar() + "\n";
+        menu += bebidasEnvasadas.listar() + "\n";
         return menu;
     }
-    */
+
 }
